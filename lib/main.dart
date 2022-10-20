@@ -29,6 +29,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class DeviceDisplay extends Center {
+    final String tagname;
+    DeviceDisplay(this.tagname);
     @override
     var child = Column(
       // Invoke "debug painting" (press "p" in the console, choose the
@@ -44,7 +46,7 @@ class DeviceDisplay extends Center {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
             const Text(
-                'TAG Device/Room',
+                'this has to be tag name',
             ),
             Row (
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -95,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: DeviceDisplay(),
+      body: DeviceDisplay('MyRoom'),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
