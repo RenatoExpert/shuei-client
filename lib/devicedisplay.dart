@@ -6,7 +6,8 @@ class DeviceDisplay extends StatefulWidget {
 	@override
 	_DeviceDisplayState createState() => _DeviceDisplayState(this.devtag);
 }
-	
+
+
 class _DeviceDisplayState extends State<DeviceDisplay> {
 	final String devtag;
 	_DeviceDisplayState(@required this.devtag);
@@ -31,7 +32,7 @@ class _DeviceDisplayState extends State<DeviceDisplay> {
 							IconButton(
 								icon: Icon(
 									Icons.lightbulb,
-									semanticLabel: 'Lock',
+									semanticLabel: 'Light',
 									size: 30,
 								),
 								onPressed: () {},
@@ -39,7 +40,7 @@ class _DeviceDisplayState extends State<DeviceDisplay> {
 							IconButton(
 								icon: Icon(
 									Icons.ac_unit,
-									semanticLabel: 'Lock',
+									semanticLabel: 'Air conditioner',
 									size: 30,
 								),
 								onPressed: () {},
