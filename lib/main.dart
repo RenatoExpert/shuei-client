@@ -39,9 +39,7 @@ class DeviceDisplay extends Center {
       // to see the wireframe for each widget.
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-            const Text(
-                'this has to be tag name',
-            ),
+            const Text("oh god"),
             Row (
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
