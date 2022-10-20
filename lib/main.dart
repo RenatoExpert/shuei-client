@@ -28,7 +28,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class DeviceController extends Center {
+class DeviceDisplay extends Center {
     @override
     var child = Column(
       // Invoke "debug painting" (press "p" in the console, choose the
@@ -95,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: DeviceController(),
+      body: DeviceDisplay(),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
