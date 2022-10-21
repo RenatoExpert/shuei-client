@@ -7,6 +7,30 @@ class DeviceDisplay extends StatefulWidget {
 	_DeviceDisplayState createState() => _DeviceDisplayState(this.devtag);
 }
 
+class GenericIconButton extends StatefulWidget {
+	final IconData iconsym;
+	final String radical;
+	GenericIconButton(@required this.iconsym, @required this.radical);
+	@override
+	_GenericIconButtonState createState() => _GenericIconButtonState(this.iconsym, this.radical);
+}
+
+class _GenericIconButtonState extends State<GenericIconButton> {
+	final IconData iconsym;
+	final String radical;
+	_GenericIconButtonState(@required this.iconsym, @required this.radical);
+	@override
+	Widget build(BuildContext context) {
+		return IconButton(
+			icon: Icon(
+				iconsym,
+				semanticLabel: radical,
+				size: 30,
+			),
+			onPressed: () {},
+		);
+	}	
+}
 
 class _DeviceDisplayState extends State<DeviceDisplay> {
 	final String devtag;
@@ -21,31 +45,9 @@ class _DeviceDisplayState extends State<DeviceDisplay> {
 					Row (
 						mainAxisAlignment: MainAxisAlignment.center,
 						children: <Widget>[
-							IconButton(
-								icon: Icon(
-									Icons.lock,
-									semanticLabel: 'Lock',
-									size: 30,
-								),
-								onPressed: () {},
-							),
-							IconButton(
-								icon: Icon(
-									Icons.lightbulb,
-									semanticLabel: 'Light',
-									size: 30,
-								),
-								onPressed: () {},
-							),
-							IconButton(
-								icon: Icon(
-									Icons.ac_unit,
-									semanticLabel: 'Air conditioner',
-									size: 30,
-								),
-								onPressed: () {},
-								tooltip: 'Turn ON/OFF switch',
-							),
+							GenericIconButton (Icons.lock, 'Lock'),
+							GenericIconButton (Icons.lightbulb, 'Light'),
+							GenericIconButton (Icons.ac_unit, 'Air conditioner'),
 						], //   row's children
 					), //   row 
 				], //   columns' children
