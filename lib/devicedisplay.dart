@@ -18,6 +18,11 @@ class GenericIconButton extends StatefulWidget {
 class _GenericIconButtonState extends State<GenericIconButton> {
 	final IconData iconsym;
 	final String radical;
+	final bool _lock_state = false;
+	get tooltip_render { 
+			if (_lock_state) return 'ola';
+			else return "no";
+	}
 	_GenericIconButtonState(@required this.iconsym, @required this.radical);
 	@override
 	Widget build(BuildContext context) {
@@ -28,7 +33,7 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 				size: 30,
 			),
 			onPressed: () {},
-			tooltip: "Press to revert its state",
+			tooltip: tooltip_render,
 		);
 	}	
 }
