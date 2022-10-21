@@ -28,6 +28,7 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 				size: 30,
 			),
 			onPressed: () {},
+			tooltip: "Press to revert its state",
 		);
 	}	
 }
