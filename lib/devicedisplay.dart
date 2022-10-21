@@ -24,12 +24,16 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 		var inverse = lock_state ? 'disable' : 'enable';
 		return "${radical} is ${execution}. Click to ${inverse}";
 	}
+	get iconColor {
+		return lock_state ? Colors.green : Colors.black;
+	}
 	_GenericIconButtonState(@required this.iconsym, @required this.radical);
 	@override
 	Widget build(BuildContext context) {
 		return IconButton(
 			icon: Icon(
 				iconsym,
+				color: iconColor,
 				semanticLabel: radical,
 				size: 30,
 			),
