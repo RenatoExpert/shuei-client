@@ -18,10 +18,11 @@ class GenericIconButton extends StatefulWidget {
 class _GenericIconButtonState extends State<GenericIconButton> {
 	final IconData iconsym;
 	final String radical;
-	final bool _lock_state = false;
+	bool lock_state = false;
 	get tooltip_render { 
-			if (_lock_state) return 'ola';
-			else return "no";
+		var execution = lock_state ? 'Allowed' : 'Disabled';
+		var inverse = lock_state ? 'disable' : 'enable';
+		return "${radical} is ${execution}. Click to ${inverse}";
 	}
 	_GenericIconButtonState(@required this.iconsym, @required this.radical);
 	@override
@@ -32,7 +33,11 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 				semanticLabel: radical,
 				size: 30,
 			),
-			onPressed: () {},
+			onPressed: () {
+				setState(() {
+					lock_state = !lock_state;
+				});
+			},
 			tooltip: tooltip_render,
 		);
 	}	
