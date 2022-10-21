@@ -1,4 +1,4 @@
-# janus-supervisor
+# Janus Supervisor
 Supervisor code source for JanusPi project. Written in Dart using Flutter framework.
 
 ## Icon meaning
@@ -8,7 +8,7 @@ For while, we focus on working with only three peripherals: one for door lock, a
 | ---------------- | --------------- |
 | Door lock        | Icons.lock      |
 | Light            | Icons.lightbulb |
-| Air conditionair | Icons.ac\_unit  |
+| Air conditioner | Icons.ac\_unit  |
 ### States and their colors and labels
 Peripherals may be `allowed` or `disabled` by __execution module__, it may also be `in-use` or `asleep` second to __sensor module__.
 We can make a color representation for each of those states, as well as tell them on `semanticLabel` (for accessibility).
