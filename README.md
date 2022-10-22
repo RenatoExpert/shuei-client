@@ -1,5 +1,5 @@
-# Janus Supervisor
-Supervisor code source for JanusPi project. Written in Dart using Flutter framework.
+# Shuei Client　守衛　クライアント
+Code source for Client app from Shuei project. Written in Dart using Flutter framework.
 
 ## Icon meaning
 ### Draw
