@@ -1,4 +1,4 @@
-# Shuei Client　守衛　クライアント
+# Shuei Client　守衛クライアント
 Code source for Client app from Shuei project. Written in Dart using Flutter framework.
 
 ## Icon meaning
