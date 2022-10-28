@@ -30,5 +30,4 @@ void talk_to_server() async {
 Future<void> sendCommands(Socket socket, String message) async {
 	print('Client: $message');
 	socket.write(message);
-	await Future.delayed(Duration(seconds:2));
 }
