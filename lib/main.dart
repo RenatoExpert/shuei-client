@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'devicedisplay.dart';
+import 'dart:async';
 
 void main() {
   runApp(const MyApp());
@@ -52,4 +53,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+  @override
+	void initState() {
+		super.initState();
+		Timer.periodic(Duration(seconds:1), (Timer){
+			print('oi');
+		});
+	}
 }
