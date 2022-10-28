@@ -4,7 +4,9 @@ import 'dart:convert';
 
 var Current_States = {};
 final update_states = () async {
-	Current_States = jsonDecode(await Net.talk_to_server());
+	Map<dynamic, dynamic> NewStates = jsonDecode(await Net.talk_to_server());
+	Current_States = NewStates is Map ? NewStates : Current_States;
+	print(Current_States['j324u']);
 };
 
 class DeviceDisplay extends StatefulWidget {
@@ -27,11 +29,9 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 	final IconData iconsym;
 	final String radical;
 	final int gadget_index;
-	bool lock_state () => Current_States['j324u'] == '333';
+	bool lock_state () => Current_States['j324u']=='333' ? true:false;
 	final revert_button = () {
-		setState() {
 			update_states();
-		}
 	};
 	get tooltip_render { 
 		var execution = lock_state() ? 'Allowed' : 'Disabled';
