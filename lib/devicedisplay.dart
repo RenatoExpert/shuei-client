@@ -20,7 +20,7 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 	final IconData iconsym;
 	final String radical;
 	bool lock_state = false;
-	final nettrigger=() {
+	final revert_button = () {
 		Net.talk_to_server();
 	};
 	get tooltip_render { 
@@ -44,7 +44,7 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 			onPressed: () {
 				setState(() {
 					lock_state = !lock_state;
-					nettrigger();
+					revert_button();
 				});
 			},
 			tooltip: tooltip_render,
