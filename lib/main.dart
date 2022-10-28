@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'devicedisplay.dart';
-import 'communicator.dart';
 
 void main() {
   runApp(const MyApp());
