@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'communicator.dart';
+import 'dart:convert';
 
-bool global_state = true;
+var Current_States = {};
+final update_states = () async {
+	Current_States = jsonDecode(await Net.talk_to_server());
+};
 
 class DeviceDisplay extends StatefulWidget {
 	final String devtag;
@@ -21,9 +25,11 @@ class GenericIconButton extends StatefulWidget {
 class _GenericIconButtonState extends State<GenericIconButton> {
 	final IconData iconsym;
 	final String radical;
-	bool lock_state () => global_state;
+	bool lock_state () => Current_States['j324u'] == '333';
 	final revert_button = () {
-		Net.talk_to_server();
+		setState() {
+			update_states();
+		}
 	};
 	get tooltip_render { 
 		var execution = lock_state() ? 'Allowed' : 'Disabled';
