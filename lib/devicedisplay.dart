@@ -17,14 +17,16 @@ class DeviceDisplay extends StatefulWidget {
 class GenericIconButton extends StatefulWidget {
 	final IconData iconsym;
 	final String radical;
-	GenericIconButton(@required this.iconsym, @required this.radical);
+	final int gadget_index;
+	GenericIconButton(@required this.iconsym, @required this.radical, @required this.gadget_index);
 	@override
-	_GenericIconButtonState createState() => _GenericIconButtonState(this.iconsym, this.radical);
+	_GenericIconButtonState createState() => _GenericIconButtonState(this.iconsym, this.radical, this.gadget_index);
 }
 
 class _GenericIconButtonState extends State<GenericIconButton> {
 	final IconData iconsym;
 	final String radical;
+	final int gadget_index;
 	bool lock_state () => Current_States['j324u'] == '333';
 	final revert_button = () {
 		setState() {
@@ -39,7 +41,7 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 	get iconColor {
 		return lock_state() ? Colors.green : Colors.black;
 	}
-	_GenericIconButtonState(@required this.iconsym, @required this.radical);
+	_GenericIconButtonState(@required this.iconsym, @required this.radical, @required this.gadget_index);
 	@override
 	Widget build(BuildContext context) {
 		return IconButton(
@@ -72,9 +74,9 @@ class _DeviceDisplayState extends State<DeviceDisplay> {
 					Row (
 						mainAxisAlignment: MainAxisAlignment.center,
 						children: <Widget>[
-							GenericIconButton (Icons.lock, 'Lock'),
-							GenericIconButton (Icons.lightbulb, 'Light'),
-							GenericIconButton (Icons.ac_unit, 'Air conditioner'),
+							GenericIconButton (Icons.lock, 'Lock', 0),
+							GenericIconButton (Icons.lightbulb, 'Light', 1),
+							GenericIconButton (Icons.ac_unit, 'Air conditioner', 2),
 						], //   row's children
 					), //   row 
 				], //   columns' children
