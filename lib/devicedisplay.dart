@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'communicator.dart';
 
+bool global_state = true;
+
 class DeviceDisplay extends StatefulWidget {
 	final String devtag;
 	DeviceDisplay(@required this.devtag);
@@ -19,17 +21,17 @@ class GenericIconButton extends StatefulWidget {
 class _GenericIconButtonState extends State<GenericIconButton> {
 	final IconData iconsym;
 	final String radical;
-	bool lock_state = false;
+	bool lock_state () => global_state;
 	final revert_button = () {
 		Net.talk_to_server();
 	};
 	get tooltip_render { 
-		var execution = lock_state ? 'Allowed' : 'Disabled';
-		var inverse = lock_state ? 'disable' : 'enable';
+		var execution = lock_state() ? 'Allowed' : 'Disabled';
+		var inverse = lock_state() ? 'disable' : 'enable';
 		return "${radical} is ${execution}. Click to ${inverse}";
 	}
 	get iconColor {
-		return lock_state ? Colors.green : Colors.black;
+		return lock_state() ? Colors.green : Colors.black;
 	}
 	_GenericIconButtonState(@required this.iconsym, @required this.radical);
 	@override
@@ -43,7 +45,6 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 			),
 			onPressed: () {
 				setState(() {
-					lock_state = !lock_state;
 					revert_button();
 				});
 			},
