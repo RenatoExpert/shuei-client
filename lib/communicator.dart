@@ -8,7 +8,7 @@ void main() {
 void talk_to_server() async {
 	final socket = await Socket.connect('localhost', 2000);
 	print('Connected to ${socket.remoteAddress.address}:${socket.remotePort}');
-	await sendCommands(socket, '{"type":"client"}');
+	await sendCommands(socket, '{ "type":"client" }\n');
 	socket.listen(
 		(Uint8List data) {
 			final serverResponse = String.fromCharCodes(data);
