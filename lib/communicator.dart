@@ -2,16 +2,14 @@ import 'dart:typed_data';
 import 'dart:io';
 
 class Net {
-	static Future talk_to_server() async {
+	static Future<String> talk_to_server() async {
 		final socket = await Socket.connect('localhost', 2000);
 		var gstatus;
 		print('Connected to ${socket.remoteAddress.address}:${socket.remotePort}');
 		await Net.sendCommands(socket, '{ "type":"client" }\n');
-		socket.listen(
+		var waitback = socket.listen(
 			(Uint8List data) {
-				final serverResponse = String.fromCharCodes(data);
-				print('Server: $serverResponse');
-				gstatus = serverResponse;
+				gstatus = String.fromCharCodes(data);
 			},
 
 			onError:(error) {
@@ -20,10 +18,10 @@ class Net {
 			},
 
 			onDone: () {
-				print('Server left.');
 				socket.destroy();
 			},
 		);
+		await waitback.asFuture<void>();
 		return gstatus;
 	}
 	static Future<void> sendCommands(Socket socket, String message) async {
