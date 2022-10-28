@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'communicator.dart';
 
 class DeviceDisplay extends StatefulWidget {
 	final String devtag;
@@ -19,6 +20,9 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 	final IconData iconsym;
 	final String radical;
 	bool lock_state = false;
+	final nettrigger=() {
+		Net.talk_to_server();
+	};
 	get tooltip_render { 
 		var execution = lock_state ? 'Allowed' : 'Disabled';
 		var inverse = lock_state ? 'disable' : 'enable';
@@ -40,6 +44,7 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 			onPressed: () {
 				setState(() {
 					lock_state = !lock_state;
+					nettrigger();
 				});
 			},
 			tooltip: tooltip_render,
