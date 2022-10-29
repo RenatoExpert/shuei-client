@@ -22,9 +22,7 @@ class Server {
 			       current_states = NewStates;
 			};
 			print(current_states);
-			print(current_states['j324u']);
 			var prob = (current_states).runtimeType;
-			print('eita $prob');
 		});
 	}
 }
