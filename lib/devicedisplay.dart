@@ -3,7 +3,7 @@ import 'communicator.dart';
 import 'dart:convert';
 import 'dart:async';
 
-var current_states;
+Map<String, dynamic> current_states = {};
 class Server {
 	final Stream _stream = Stream.periodic(
 		const Duration(seconds:1),
