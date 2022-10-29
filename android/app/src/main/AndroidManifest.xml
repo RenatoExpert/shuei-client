@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.janus_supervisor">
+    package="com.example.shuei_client">
    <application
-        android:label="janus_supervisor"
+        android:label="shuei_client"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

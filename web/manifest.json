@@ -1,6 +1,6 @@
 {
-    "name": "janus_supervisor",
-    "short_name": "janus_supervisor",
+    "name": "shuei_client",
+    "short_name": "shuei_client",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
