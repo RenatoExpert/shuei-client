@@ -49,23 +49,37 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 	final IconData iconsym;
 	final String radical;
 	final int gadget_index;
-	bool lock_state () {
+	String lock_state () {
 		if (current_states.containsKey('j324u')) {
-			return current_states['j324u'].toString()[gadget_index]=='3' ? true:false;
+			return current_states['j324u'].toString()[gadget_index];
 		} else {
-			return false;
+			return 'null';
 		}
 	}
 	final revert_button = () {
 		print('revert');
 	};
 	get tooltip_render { 
-		var execution = lock_state() ? 'Allowed' : 'Disabled';
-		var inverse = lock_state() ? 'disable' : 'enable';
+		var isActive = lock_state() == '2'|| lock_state() =='3'; 
+		var execution = isActive  ? 'Allowed' : 'Disabled';
+		var inverse = isActive ? 'disable' : 'enable';
 		return "${radical} is ${execution}. Click to ${inverse}";
 	}
 	get iconColor {
-		return lock_state() ? Colors.green : Colors.black;
+		switch (lock_state()) {
+			case '0':
+				return Colors.black;
+				break;
+			case '1':
+				return Colors.red;
+				break;
+			case '2':
+				return Colors.yellow;
+				break;
+			case '3':
+				return Colors.green;
+				break;
+		}
 	}
 	_GenericIconButtonState(@required this.iconsym, @required this.radical, @required this.gadget_index);
 	@override
