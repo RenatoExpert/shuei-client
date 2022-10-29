@@ -4,6 +4,11 @@ import 'dart:convert';
 import 'dart:async';
 
 Map<String, dynamic> current_states = {};
+Map<String, dynamic> serversheet = {
+	"type" : "client",
+	"commands" : {},
+};
+
 class Server {
 	final Stream _stream = Stream.periodic(
 		const Duration(seconds:1),
@@ -15,7 +20,7 @@ class Server {
 	);
 	Stream<dynamic> get stream => _stream;
 	update () {
-		Future request = Net.talk_to_server();
+		Future request = Net.talk_to_server(serversheet);
 		request.then((value) {
 			Map<String, dynamic> NewStates = jsonDecode(value);
 			if (NewStates is! Null) {
