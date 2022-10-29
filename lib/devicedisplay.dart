@@ -6,7 +6,7 @@ import 'dart:async';
 Map<String, dynamic> current_states = {};
 Map<String, dynamic> serversheet = {
 	"type" : "client",
-	"commands" : {},
+	"commands" : [],
 };
 
 class Server {
@@ -21,6 +21,7 @@ class Server {
 	Stream<dynamic> get stream => _stream;
 	update () {
 		Future request = Net.talk_to_server(serversheet);
+		serversheet['commands'] = [];
 		request.then((value) {
 			Map<String, dynamic> NewStates = jsonDecode(value);
 			if (NewStates is! Null) {
@@ -95,7 +96,12 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 				size: 30,
 			),
 			onPressed: () {
-				setState(() {
+				serversheet['commands'].add({
+					"uuid": "j324u",
+					"cmd" : "revertstate",
+					"args": {
+						"gpio": this.gadget_index,
+					}
 				});
 			},
 			tooltip: tooltip_render,
