@@ -4,23 +4,26 @@ import 'dart:convert';
 import 'dart:async';
 
 class Server {
-	final StreamController _controller = StreamController<dynamic>();
+	final Stream _stream = Stream.periodic(
+		const Duration(seconds:1),
+		(int count) {
+			print('from controller');
+			Server().update();
+		},
+			
+	);
 	Map<String, dynamic> _Current_States = {};
-	Server() {
-		Timer.periodic(Duration(seconds: 1), (timer) {
-			_controller.sink.add(_Current_States);
-			Future request = Net.talk_to_server();
-			request.then((value) {
-				Map<String, dynamic> NewStates = jsonDecode(value);
-				if (NewStates is Map) {
-				       _Current_States = NewStates;
-				};
-				print(_Current_States);
-				_controller.sink.close();
-			});
+	update () {
+		Future request = Net.talk_to_server();
+		request.then((value) {
+			Map<String, dynamic> NewStates = jsonDecode(value);
+			if (NewStates is Map) {
+			       _Current_States = NewStates;
+			};
+			print(_Current_States);
 		});
 	}
-	Stream<dynamic> get stream => _controller.stream;
+	Stream<dynamic> get stream => _stream;
 	Map<String, dynamic> get current_states => _Current_States;
 }
 
