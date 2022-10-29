@@ -2,7 +2,7 @@ import 'dart:typed_data';
 import 'dart:io';
 
 class Net {
-	static Future<String> talk_to_server() async {
+	static Future<String> talk_to_server([cmd, args]) async {
 		final host = 'shuei.shogunautomacao.com.br';
 		final port = 2000;
 		final socket = await Socket.connect(host, port);
