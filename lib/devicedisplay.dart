@@ -16,15 +16,6 @@ class Server {
 	}
 	Stream<int> get stream => _controller.stream;
 }
-final estados = Server().stream;
-final subscription = estados.listen(
-	(data) {
-		print('Data: $data');
-	},
-	onDone: () {
-		print('Concluido');
-	}
-);
 
 class DeviceDisplay extends StatefulWidget {
 	final String devtag;
@@ -70,7 +61,6 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 			),
 			onPressed: () {
 				setState(() {
-					revert_button();
 				});
 			},
 			tooltip: tooltip_render,
@@ -88,14 +78,22 @@ class _DeviceDisplayState extends State<DeviceDisplay> {
 				mainAxisAlignment: MainAxisAlignment.center,
 				children: <Widget>[
 					Text(devtag),
-					Row (
-						mainAxisAlignment: MainAxisAlignment.center,
-						children: <Widget>[
-							GenericIconButton (Icons.lock, 'Lock', 0),
-							GenericIconButton (Icons.lightbulb, 'Light', 1),
-							GenericIconButton (Icons.ac_unit, 'Air conditioner', 2),
-						], //   row's children
-					), //   row 
+					StreamBuilder<int>(
+						Stream: Server().stream,
+						builder: (
+								BuildContext context,
+								AsyncSnapshot<int> snapshot,
+						) {
+							return Row (
+								mainAxisAlignment: MainAxisAlignment.center,
+								children: <Widget>[
+									GenericIconButton (Icons.lock, 'Lock', 0),
+									GenericIconButton (Icons.lightbulb, 'Light', 1),
+									GenericIconButton (Icons.ac_unit, 'Air conditioner', 2),
+								], //   row's children
+							), //   row 
+						} // stream's builder
+					), // Stream
 				], //   columns' children
 			), //   column
 		); //	Center
