@@ -20,7 +20,7 @@ class Server {
 	);
 	Stream<dynamic> get stream => _stream;
 	update () {
-		List transitional = stack_commands;
+		List transitional = List.from(stack_commands);
 		stack_commands.removeWhere((command) => transitional.contains(command));
 		serversheet['commands'] = transitional;
 		Future request = Net.talk_to_server(serversheet);
@@ -102,9 +102,11 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 					"uuid": "j324u",
 					"cmd" : "revertstate",
 					"args": {
-						"gpio": this.gadget_index,
+						"gpio": this.gadget_index.toString(),
 					}
 				});
+				print("Got a click");
+				print(stack_commands);
 			},
 			tooltip: tooltip_render,
 		);
