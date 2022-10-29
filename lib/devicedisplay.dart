@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:async';
 
 Map<String, dynamic> current_states = {};
+List stack_commands = [];
 Map<String, dynamic> serversheet = {
 	"type" : "client",
 	"commands" : [],
@@ -19,8 +20,10 @@ class Server {
 	);
 	Stream<dynamic> get stream => _stream;
 	update () {
+		List transitional = stack_commands;
+		stack_commands.removeWhere((command) => transitional.contains(command));
+		serversheet['commands'] = transitional;
 		Future request = Net.talk_to_server(serversheet);
-		serversheet['commands'] = [];
 		request.then((value) {
 			Map<String, dynamic> NewStates = jsonDecode(value);
 			if (NewStates is! Null) {
@@ -95,7 +98,7 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 				size: 30,
 			),
 			onPressed: () {
-				serversheet['commands'].add({
+				stack_commands.add({
 					"uuid": "j324u",
 					"cmd" : "revertstate",
 					"args": {
