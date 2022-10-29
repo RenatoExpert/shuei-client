@@ -6,7 +6,7 @@ class Net {
 		final socket = await Socket.connect('localhost', 2000);
 		var gstatus;
 		print('Connected to ${socket.remoteAddress.address}:${socket.remotePort}');
-		await Net.sendCommands(socket, '{ "type":"client" }\n');
+		socket.write('{ "type":"client" }\n');
 		var waitback = socket.listen(
 			(Uint8List data) {
 				gstatus = String.fromCharCodes(data);
@@ -23,10 +23,7 @@ class Net {
 			},
 		);
 		await waitback.asFuture<void>();
+		socket.destroy();
 		return gstatus;
-	}
-	static Future<void> sendCommands(Socket socket, String message) async {
-		print('Client: $message');
-		socket.write(message);
 	}
 }
