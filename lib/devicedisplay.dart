@@ -6,8 +6,8 @@ import 'dart:async';
 class Server {
 	final StreamController _controller = StreamController<dynamic>();
 	Map<String, dynamic> _Current_States = {};
-	Server() {
-		Timer.periodic(Duration(seconds: 1), (timer) async {
+	Server() async {
+		await Timer.periodic(Duration(seconds: 1), (timer) async {
 			_controller.sink.add(_Current_States);
 			Map<String, dynamic> NewStates = jsonDecode(await Net.talk_to_server());
 			if (NewStates is Map) {
