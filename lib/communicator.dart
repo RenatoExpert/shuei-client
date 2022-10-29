@@ -3,7 +3,9 @@ import 'dart:io';
 
 class Net {
 	static Future<String> talk_to_server() async {
-		final socket = await Socket.connect('localhost', 2000);
+		final host = 'shuei.shogunautomacao.com.br';
+		final port = 2000;
+		final socket = await Socket.connect(host, port);
 		var gstatus;
 		print('Connected to ${socket.remoteAddress.address}:${socket.remotePort}');
 		socket.write('{ "type":"client" }\n');
