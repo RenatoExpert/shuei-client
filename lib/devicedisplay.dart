@@ -5,11 +5,11 @@ import 'dart:async';
 
 class Server {
 	final StreamController _controller = StreamController<dynamic>();
-	Map<String, String> _Current_States = {};
+	Map<String, dynamic> _Current_States = {};
 	Server() {
 		Timer.periodic(Duration(seconds: 1), (timer) async {
 			_controller.sink.add(_Current_States);
-			Map<String, String> NewStates = jsonDecode(await Net.talk_to_server());
+			Map<String, dynamic> NewStates = jsonDecode(await Net.talk_to_server());
 			if (NewStates is Map) {
 			       _Current_States = NewStates;
 			};
@@ -34,7 +34,6 @@ class GenericIconButton extends StatefulWidget {
 	@override
 	_GenericIconButtonState createState() => _GenericIconButtonState(this.iconsym, this.radical, this.gadget_index);
 }
-var Current_States={};
 
 class _GenericIconButtonState extends State<GenericIconButton> {
 	final IconData iconsym;
