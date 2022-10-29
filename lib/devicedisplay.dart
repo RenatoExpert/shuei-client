@@ -1,13 +1,30 @@
 import 'package:flutter/material.dart';
 import 'communicator.dart';
 import 'dart:convert';
+import 'dart:async';
 
-var Current_States = {};
-final update_states = () async {
-	Map<dynamic, dynamic> NewStates = jsonDecode(await Net.talk_to_server());
-	Current_States = NewStates is Map ? NewStates : Current_States;
-	print(Current_States['j324u']);
-};
+class Server {
+	final StreamController _controller = StreamController<int>();
+	Map<String:String> _Current_States = {};
+	fetch_states() {
+		Timer.periodic(Duration(seconds: 1), (timer) {
+			_controller.sink.add(_Current_States);
+			Map<String, String> NewStates = jsonDecode(await Net.talk_to_server());
+			if NewStates is Map _Current_States = NewStates;
+			_controller.sink.close();
+		})
+	}
+	Stream<int> get stream => _controller.stream;
+}
+final estados = Server().stream;
+final subscription = estados.listen(
+	(data) {
+		print('Data: $data');
+	},
+	onDone: () {
+		print('Concluido');
+	}
+);
 
 class DeviceDisplay extends StatefulWidget {
 	final String devtag;
