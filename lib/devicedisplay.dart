@@ -102,7 +102,7 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 					"uuid": "j324u",
 					"cmd" : "revertstate",
 					"args": {
-						"gpio": this.gadget_index.toString(),
+						"pair_id": this.gadget_index.toString(),
 					}
 				});
 				print("Got a click");
