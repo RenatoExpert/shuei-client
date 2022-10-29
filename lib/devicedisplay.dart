@@ -3,6 +3,7 @@ import 'communicator.dart';
 import 'dart:convert';
 import 'dart:async';
 
+var current_states;
 class Server {
 	final Stream _stream = Stream.periodic(
 		const Duration(seconds:1),
@@ -12,19 +13,20 @@ class Server {
 		},
 			
 	);
-	Map<String, dynamic> _Current_States = {};
+	Stream<dynamic> get stream => _stream;
 	update () {
 		Future request = Net.talk_to_server();
 		request.then((value) {
 			Map<String, dynamic> NewStates = jsonDecode(value);
-			if (NewStates is Map) {
-			       _Current_States = NewStates;
+			if (NewStates is! Null) {
+			       current_states = NewStates;
 			};
-			print(_Current_States);
+			print(current_states);
+			print(current_states['j324u']);
+			var prob = (current_states).runtimeType;
+			print('eita $prob');
 		});
 	}
-	Stream<dynamic> get stream => _stream;
-	Map<String, dynamic> get current_states => _Current_States;
 }
 
 class DeviceDisplay extends StatefulWidget {
@@ -47,7 +49,13 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 	final IconData iconsym;
 	final String radical;
 	final int gadget_index;
-	bool lock_state () => Server().current_states['j324u'].toString()=='333' ? true:false;
+	bool lock_state () {
+		if (current_states.containsKey('j324u')) {
+			return current_states['j324u'].toString()[gadget_index]=='3' ? true:false;
+		} else {
+			return false;
+		}
+	}
 	final revert_button = () {
 		print('revert');
 	};
