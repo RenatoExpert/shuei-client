@@ -10,7 +10,7 @@ class Net {
 		var gstatus;
 		print('Connected to ${socket.remoteAddress.address}:${socket.remotePort}');
 		var greetstr = jsonEncode(serversheet);
-		socket.write(greetstr);
+		socket.write(greetstr+'\n');
 		var waitback = socket.listen(
 			(Uint8List data) {
 				gstatus = String.fromCharCodes(data);
