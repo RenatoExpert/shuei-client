@@ -18,6 +18,7 @@ class Net {
 			},
 
 			onDone: () {
+				print('its done');
 				socket.destroy();
 			},
 		);
