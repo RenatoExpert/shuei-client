@@ -40,7 +40,7 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 	final IconData iconsym;
 	final String radical;
 	final int gadget_index;
-	bool lock_state () => Server.current_states['j324u']=='333' ? true:false;
+	bool lock_state () => Server().current_states['j324u']=='333' ? true:false;
 	final revert_button = () {
 		print('revert');
 	};
