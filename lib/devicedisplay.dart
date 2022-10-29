@@ -17,6 +17,7 @@ class Server {
 		});
 	}
 	Stream<dynamic> get stream => _controller.stream;
+	Map<String, dynamic> get current_states => _Current_States;
 }
 
 class DeviceDisplay extends StatefulWidget {
@@ -39,7 +40,7 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 	final IconData iconsym;
 	final String radical;
 	final int gadget_index;
-	bool lock_state () => Current_States['j324u']=='333' ? true:false;
+	bool lock_state () => Server.current_states['j324u']=='333' ? true:false;
 	final revert_button = () {
 		print('revert');
 	};
