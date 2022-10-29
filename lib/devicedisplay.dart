@@ -4,17 +4,19 @@ import 'dart:convert';
 import 'dart:async';
 
 class Server {
-	final StreamController _controller = StreamController<int>();
-	Map<String:String> _Current_States = {};
+	final StreamController _controller = StreamController<dynamic>();
+	Map<String, String> _Current_States = {};
 	fetch_states() {
-		Timer.periodic(Duration(seconds: 1), (timer) {
+		Timer.periodic(Duration(seconds: 1), (timer) async {
 			_controller.sink.add(_Current_States);
 			Map<String, String> NewStates = jsonDecode(await Net.talk_to_server());
-			if NewStates is Map _Current_States = NewStates;
+			if (NewStates is Map) {
+			       _Current_States = NewStates;
+			};
 			_controller.sink.close();
-		})
+		});
 	}
-	Stream<int> get stream => _controller.stream;
+	Stream<dynamic> get stream => _controller.stream;
 }
 
 class DeviceDisplay extends StatefulWidget {
@@ -32,6 +34,7 @@ class GenericIconButton extends StatefulWidget {
 	@override
 	_GenericIconButtonState createState() => _GenericIconButtonState(this.iconsym, this.radical, this.gadget_index);
 }
+var Current_States={};
 
 class _GenericIconButtonState extends State<GenericIconButton> {
 	final IconData iconsym;
@@ -39,7 +42,7 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 	final int gadget_index;
 	bool lock_state () => Current_States['j324u']=='333' ? true:false;
 	final revert_button = () {
-			update_states();
+		print('revert');
 	};
 	get tooltip_render { 
 		var execution = lock_state() ? 'Allowed' : 'Disabled';
@@ -78,11 +81,11 @@ class _DeviceDisplayState extends State<DeviceDisplay> {
 				mainAxisAlignment: MainAxisAlignment.center,
 				children: <Widget>[
 					Text(devtag),
-					StreamBuilder<int>(
-						Stream: Server().stream,
+					StreamBuilder<dynamic>(
+						stream: Server().stream,
 						builder: (
 								BuildContext context,
-								AsyncSnapshot<int> snapshot,
+								AsyncSnapshot<dynamic> snapshot,
 						) {
 							return Row (
 								mainAxisAlignment: MainAxisAlignment.center,
@@ -91,8 +94,8 @@ class _DeviceDisplayState extends State<DeviceDisplay> {
 									GenericIconButton (Icons.lightbulb, 'Light', 1),
 									GenericIconButton (Icons.ac_unit, 'Air conditioner', 2),
 								], //   row's children
-							), //   row 
-						} // stream's builder
+							); //   row 
+						}, // stream's builder
 					), // Stream
 				], //   columns' children
 			), //   column
