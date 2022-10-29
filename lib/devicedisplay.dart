@@ -13,7 +13,6 @@ class Server {
 	final Stream _stream = Stream.periodic(
 		const Duration(seconds:1),
 		(int count) {
-			print('from controller');
 			Server().update();
 		},
 			
