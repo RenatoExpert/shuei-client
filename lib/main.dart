@@ -45,7 +45,11 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: DeviceDisplay("Device Tag"),
+      body: Column(
+		children: [
+			DeviceDisplay('ola'),
+		]
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',

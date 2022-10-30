@@ -46,7 +46,7 @@ class GenericIconButton extends StatefulWidget {
 	final IconData iconsym;
 	final String radical;
 	final int gadget_index;
-	final String this.uuid;
+	final String uuid;
 	GenericIconButton(@required this.iconsym, @required this.radical, @required this.gadget_index, @required this.uuid);
 	@override
 	_GenericIconButtonState createState() => _GenericIconButtonState(this.iconsym, this.radical, this.gadget_index, this.uuid);
@@ -124,7 +124,7 @@ class _DeviceDisplayState extends State<DeviceDisplay> {
 			child: Column(
 				mainAxisAlignment: MainAxisAlignment.center,
 				children: <Widget>[
-					Text(this.uuid'),
+					Text(this.uuid),
 					StreamBuilder<dynamic>(
 						stream: Server().stream,
 						builder: (
