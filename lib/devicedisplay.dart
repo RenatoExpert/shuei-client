@@ -5,10 +5,7 @@ import 'dart:async';
 
 Map<String, dynamic> current_states = {};
 List stack_commands = [];
-Map<String, dynamic> serversheet = {
-	"type" : "client",
-	"commands" : [],
-};
+Map<String, dynamic> serversheet = { };
 
 class Server {
 	final Stream _stream = Stream.periodic(
