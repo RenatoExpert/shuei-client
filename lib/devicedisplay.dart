@@ -36,10 +36,10 @@ class Server {
 }
 
 class DeviceDisplay extends StatefulWidget {
-	final String devtag;
-	DeviceDisplay(@required this.devtag);
+	final String uuid;
+	DeviceDisplay(@required this.uuid);
 	@override
-	_DeviceDisplayState createState() => _DeviceDisplayState(this.devtag);
+	_DeviceDisplayState createState() => _DeviceDisplayState(this.uuid);
 }
 
 class GenericIconButton extends StatefulWidget {
