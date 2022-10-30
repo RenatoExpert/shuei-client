@@ -46,9 +46,9 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Column(
-		children: [
-			DeviceDisplay('ola'),
-		]
+		children: List.generate(current_states.length, (index) {
+			return DeviceDisplay(current_states[current_states.keys.toList().elementAt(index)][index-1]);
+		}),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
