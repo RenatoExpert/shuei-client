@@ -5,7 +5,7 @@ import 'dart:async';
 
 Map<String, dynamic> current_states = {};
 List stack_commands = [];
-Map<String, dynamic> serversheet = { };
+Map<String, dynamic> serversheet = { "type": "client" };
 
 class Server {
 	final Stream _stream = Stream.periodic(
@@ -23,7 +23,7 @@ class Server {
 		Future request = Net.talk_to_server(serversheet);
 		request.then((value) {
 			Map<String, dynamic> NewStates = jsonDecode(value);
-			if (NewStates is! Null) {
+			if (NewStates.isNotEmpty) {
 			       current_states = NewStates;
 			};
 			print(current_states);
