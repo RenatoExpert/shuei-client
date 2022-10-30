@@ -116,15 +116,15 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 }
 
 class _DeviceDisplayState extends State<DeviceDisplay> {
-	final String devtag;
-	_DeviceDisplayState(@required this.devtag);
+	final String uuid;
+	_DeviceDisplayState(@required this.uuid);
 	@override
 	Widget build(BuildContext context) {
 		return Center(
 			child: Column(
 				mainAxisAlignment: MainAxisAlignment.center,
 				children: <Widget>[
-					Text(devtag),
+					Text(this.uuid'),
 					StreamBuilder<dynamic>(
 						stream: Server().stream,
 						builder: (
@@ -134,9 +134,9 @@ class _DeviceDisplayState extends State<DeviceDisplay> {
 							return Row (
 								mainAxisAlignment: MainAxisAlignment.center,
 								children: <Widget>[
-									GenericIconButton (Icons.lock, 'Lock', 0),
-									GenericIconButton (Icons.lightbulb, 'Light', 1),
-									GenericIconButton (Icons.ac_unit, 'Air conditioner', 2),
+									GenericIconButton (Icons.lock, 'Lock', 0, this.uuid),
+									GenericIconButton (Icons.lightbulb, 'Light', 1, this.uuid),
+									GenericIconButton (Icons.ac_unit, 'Air conditioner', 2, this.uuid),
 								], //   row's children
 							); //   row 
 						}, // stream's builder
