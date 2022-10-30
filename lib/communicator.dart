@@ -7,13 +7,15 @@ class Net {
 		final host = 'shuei.shogunautomacao.com.br';
 		final port = 2000;
 		final socket = await Socket.connect(host, port);
-		var gstatus;
+		String gstatus = '{}';
 		print('Connected to ${socket.remoteAddress.address}:${socket.remotePort}');
 		var greetstr = jsonEncode(serversheet);
 		socket.write(greetstr+'\n');
 		var waitback = socket.listen(
 			(Uint8List data) {
-				gstatus = String.fromCharCodes(data);
+				final received = String.fromCharCodes(data);
+				print(received);
+				gstatus = received;
 			},
 
 			onError:(error) {
