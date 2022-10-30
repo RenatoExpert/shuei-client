@@ -46,18 +46,20 @@ class GenericIconButton extends StatefulWidget {
 	final IconData iconsym;
 	final String radical;
 	final int gadget_index;
-	GenericIconButton(@required this.iconsym, @required this.radical, @required this.gadget_index);
+	final String this.uuid;
+	GenericIconButton(@required this.iconsym, @required this.radical, @required this.gadget_index, @required this.uuid);
 	@override
-	_GenericIconButtonState createState() => _GenericIconButtonState(this.iconsym, this.radical, this.gadget_index);
+	_GenericIconButtonState createState() => _GenericIconButtonState(this.iconsym, this.radical, this.gadget_index, this.uuid);
 }
 
 class _GenericIconButtonState extends State<GenericIconButton> {
 	final IconData iconsym;
 	final String radical;
 	final int gadget_index;
+	final String uuid;
 	String lock_state () {
-		if (current_states.containsKey('j324u')) {
-			return current_states['j324u'].toString()[gadget_index];
+		if (current_states.containsKey(this.uuid)) {
+			return current_states[this.uuid].toString()[gadget_index];
 		} else {
 			return 'null';
 		}
@@ -87,7 +89,7 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 				break;
 		}
 	}
-	_GenericIconButtonState(@required this.iconsym, @required this.radical, @required this.gadget_index);
+	_GenericIconButtonState(@required this.iconsym, @required this.radical, @required this.gadget_index, @required this.uuid);
 	@override
 	Widget build(BuildContext context) {
 		return IconButton(
