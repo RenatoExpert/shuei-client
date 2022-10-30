@@ -101,7 +101,7 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 			),
 			onPressed: () {
 				stack_commands.add({
-					"uuid": "j324u",
+					"uuid": this.uuid,
 					"cmd" : "revertstate",
 					"args": {
 						"pair_id": this.gadget_index.toString(),
