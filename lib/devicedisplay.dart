@@ -125,22 +125,14 @@ class _DeviceDisplayState extends State<DeviceDisplay> {
 				mainAxisAlignment: MainAxisAlignment.center,
 				children: <Widget>[
 					Text(this.uuid),
-					StreamBuilder<dynamic>(
-						stream: Server().stream,
-						builder: (
-								BuildContext context,
-								AsyncSnapshot<dynamic> snapshot,
-						) {
-							return Row (
-								mainAxisAlignment: MainAxisAlignment.center,
-								children: <Widget>[
-									GenericIconButton (Icons.lock, 'Lock', 0, this.uuid),
-									GenericIconButton (Icons.lightbulb, 'Light', 1, this.uuid),
-									GenericIconButton (Icons.ac_unit, 'Air conditioner', 2, this.uuid),
-								], //   row's children
-							); //   row 
-						}, // stream's builder
-					), // Stream
+					Row (
+						mainAxisAlignment: MainAxisAlignment.center,
+						children: <Widget>[
+							GenericIconButton (Icons.lock, 'Lock', 0, this.uuid),
+							GenericIconButton (Icons.lightbulb, 'Light', 1, this.uuid),
+							GenericIconButton (Icons.ac_unit, 'Air conditioner', 2, this.uuid),
+						], //   row's children
+					), //   row 
 				], //   columns' children
 			), //   column
 		); //	Center
