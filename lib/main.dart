@@ -53,8 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
 		) {
 			return Column (
 				children: List.generate(current_states.length, (index) {
-					if (index > 0) {
-						return DeviceDisplay(current_states[current_states.keys.toList().elementAt(index)][index-1]);
+					if (current_states.length != 0) {
+						return DeviceDisplay(current_states.keys.elementAt(index));
 					} else {
 						return Text('No gadgets to display :-(');
 					}
