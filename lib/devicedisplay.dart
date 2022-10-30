@@ -9,7 +9,7 @@ Map<String, dynamic> serversheet = { "type": "client" };
 
 class Server {
 	final Stream _stream = Stream.periodic(
-		const Duration(seconds:1),
+		const Duration(milliseconds:100),
 		(int count) {
 			Server().update();
 		},
