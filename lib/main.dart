@@ -45,10 +45,22 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(
-		children: List.generate(current_states.length, (index) {
-			return DeviceDisplay(current_states[current_states.keys.toList().elementAt(index)][index-1]);
-		}),
+      body: StreamBuilder<dynamic>(
+		stream: Server().stream,
+		builder: (
+			BuildContext context,
+			AsyncSnapshot<dynamic> snapshot,
+		) {
+			return Column (
+				children: List.generate(current_states.length, (index) {
+					if (index > 0) {
+						return DeviceDisplay(current_states[current_states.keys.toList().elementAt(index)][index-1]);
+					} else {
+						return Text('No gadgets to display :-(');
+					}
+				}),
+			);
+		}
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
