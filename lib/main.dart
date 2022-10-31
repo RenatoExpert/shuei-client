@@ -59,6 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
 						return Text('No gadgets to display :-(');
 					}
 				}),
+				mainAxisAlignment: MainAxisAlignment.center,
 			);
 		}
       ),
