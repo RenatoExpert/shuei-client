@@ -6,9 +6,15 @@ import 'dart:typed_data';
 import 'dart:convert';
 
 var main_socket;
-void main() async {
+
+connect () async {
+	print('Connecting...');
 	main_socket = await Socket.connect('shuei.shogunautomacao.com.br', 2000);
 	main_socket.write('{"type":"client"}\n');
+}
+
+void main() async {
+	await connect();
   runApp(const MyApp());
 }
 
@@ -74,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
 					mainAxisAlignment: MainAxisAlignment.center,
 				);
 			} catch (e) {
-				return Text('Error (e)');
+				return Text("Error: $e");
 			}
 		}
       ),
