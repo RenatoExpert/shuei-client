@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-Map<String, dynamic> serversheet = { "type": "client" };
-Map<String, dynamic> current_states = {};
-
 class DeviceDisplay extends StatefulWidget {
 	final String uuid;
 	DeviceDisplay(@required this.uuid);
@@ -26,11 +23,14 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 	final int gadget_index;
 	final String uuid;
 	String lock_state () {
+		return '2';
+		/*
 		if (current_states.containsKey(this.uuid)) {
 			return current_states[this.uuid].toString()[gadget_index];
 		} else {
 			return 'null';
 		}
+		*/
 	}
 	final revert_button = () {
 		print('revert');
