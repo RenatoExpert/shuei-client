@@ -3,6 +3,7 @@ import 'devicedisplay.dart';
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
+import 'dart:convert';
 
 var main_socket;
 void main() async {
@@ -56,7 +57,11 @@ class _MyHomePageState extends State<MyHomePage> {
 			BuildContext context,
 			AsyncSnapshot<dynamic> snapshot,
 		) {
-			print(String.fromCharCodes(snapshot.data));
+			current_states = jsonDecode(
+				String.fromCharCodes(snapshot.data)
+			);
+			print(current_states);
+			print('received');
 			return Column (
 				children: List.generate(current_states.length, (index) {
 					if (current_states.length != 0) {
