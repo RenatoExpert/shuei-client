@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-Map<String, dynamic> serversheet = { "type": "client" };
-Map<String, dynamic> current_states = {};
-
 class DeviceDisplay extends StatefulWidget {
 	final String uuid;
 	DeviceDisplay(@required this.uuid);
