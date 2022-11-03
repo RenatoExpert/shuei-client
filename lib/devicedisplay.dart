@@ -20,7 +20,7 @@ class Server {
 		List transitional = List.from(stack_commands);
 		stack_commands.removeWhere((command) => transitional.contains(command));
 		serversheet['commands'] = transitional;
-		Future request = Net.talk_to_server(serversheet);
+		Future request = Net.listen_to_server(serversheet);
 		request.then((value) {
 			Map<String, dynamic> NewStates = jsonDecode(value);
 			if (NewStates.isNotEmpty) {

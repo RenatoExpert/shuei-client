@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:convert';
 
 class Net {
-	static Future<String> talk_to_server(serversheet) async {
+	static Future<String> listen_to_server(serversheet) async {
 		final host = 'shuei.shogunautomacao.com.br';
 		final port = 2000;
 		final socket = await Socket.connect(host, port);
