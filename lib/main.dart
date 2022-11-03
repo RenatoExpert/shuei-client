@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'devicedisplay.dart';
 import 'dart:async';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -31,7 +32,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  late Stream main_stream;
 
   void _incrementCounter() {
     setState(() {
@@ -40,13 +41,18 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void initState() {
+	  main_stream = widget.socket.asBroadcastStream();
+	  super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: StreamBuilder<dynamic>(
-		stream: Server().stream,
+		stream: main_stream,
 		builder: (
 			BuildContext context,
 			AsyncSnapshot<dynamic> snapshot,
