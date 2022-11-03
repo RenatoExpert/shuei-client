@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 import 'devicedisplay.dart';
 import 'dart:async';
+import 'dart:io';
+import 'dart:typed_data';
+import 'dart:convert';
 
-void main() {
+final host = 'shuei.shogunautomacao.com.br';
+final port = 2000;
+var main_socket;
+Map<String, dynamic> current_states = {};
+
+connect () async {
+	print('Connecting...');
+	main_socket = await Socket.connect(host, port);
+	await main_socket.write('{"type":"client"}\n');
+}
+
+void main() async {
+	await connect();
   runApp(const MyApp());
 }
 
@@ -31,12 +46,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  late Stream main_stream;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  @override
+  void initState() {
+	  main_stream = main_socket.asBroadcastStream();
+	  super.initState();
   }
 
   @override
@@ -45,28 +60,34 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: StreamBuilder<dynamic>(
-		stream: Server().stream,
+      body: Center(
+		child: StreamBuilder<dynamic>(
+		stream: main_stream.asBroadcastStream(),
 		builder: (
 			BuildContext context,
 			AsyncSnapshot<dynamic> snapshot,
 		) {
-			return Column (
-				children: List.generate(current_states.length, (index) {
-					if (current_states.length != 0) {
-						return DeviceDisplay(current_states.keys.elementAt(index));
-					} else {
-						return Text('No gadgets to display :-(');
-					}
-				}),
-				mainAxisAlignment: MainAxisAlignment.center,
-			);
+			try {
+				current_states = jsonDecode(
+					String.fromCharCodes(snapshot.data)
+				);
+				print(current_states);
+				print('received');
+				return Column (
+					children: List.generate(current_states.length, (index) {
+						if (current_states.length != 0) {
+							return DeviceDisplay(current_states.keys.elementAt(index));
+						} else {
+							return Text('No gadgets to display :-(');
+						}
+					}),
+					mainAxisAlignment: MainAxisAlignment.center,
+				);
+			} catch (e) {
+				return Text("Error: $e");
+			}
 		}
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+	)
       ),
     );
   }
