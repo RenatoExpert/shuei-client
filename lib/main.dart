@@ -34,12 +34,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late Stream main_stream;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   void initState() {
 	  main_stream = widget.socket.asBroadcastStream();
@@ -68,11 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
 				mainAxisAlignment: MainAxisAlignment.center,
 			);
 		}
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
