@@ -57,7 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: StreamBuilder<dynamic>(
+      body: Center(
+		child: StreamBuilder<dynamic>(
 		stream: main_stream.asBroadcastStream(),
 		builder: (
 			BuildContext context,
@@ -83,6 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
 				return Text("Error: $e");
 			}
 		}
+	)
       ),
     );
   }
