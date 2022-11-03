@@ -2,35 +2,10 @@ import 'package:flutter/material.dart';
 import 'communicator.dart';
 import 'dart:convert';
 import 'dart:async';
+import 'dart:io';
 
-Map<String, dynamic> current_states = {};
 List stack_commands = [];
 Map<String, dynamic> serversheet = { "type": "client" };
-
-class Server {
-	final Stream _stream = Stream.periodic(
-		const Duration(milliseconds:100),
-		(int count) {
-			Server().update();
-		},
-			
-	);
-	Stream<dynamic> get stream => _stream;
-	update () {
-		List transitional = List.from(stack_commands);
-		stack_commands.removeWhere((command) => transitional.contains(command));
-		serversheet['commands'] = transitional;
-		Future request = Net.listen_to_server(serversheet);
-		request.then((value) {
-			Map<String, dynamic> NewStates = jsonDecode(value);
-			if (NewStates.isNotEmpty) {
-			       current_states = NewStates;
-			};
-			print(current_states);
-			var prob = (current_states).runtimeType;
-		});
-	}
-}
 
 class DeviceDisplay extends StatefulWidget {
 	final String uuid;
