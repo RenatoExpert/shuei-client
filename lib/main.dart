@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'devicedisplay.dart';
 import 'dart:async';
+import 'dart:io';
+import 'dart:typed_data';
 
-
-void main() {
+var main_socket;
+void main() async {
+	main_socket = await Socket.connect('shuei.shogunautomacao.com.br', 2000);
+	main_socket.write('{"type":"client"}\n');
   runApp(const MyApp());
 }
 
@@ -36,9 +40,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-	  main_stream = widget.socket.asBroadcastStream();
+	  main_stream = main_socket.asBroadcastStream();
 	  super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,11 +51,12 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: StreamBuilder<dynamic>(
-		stream: main_stream,
+		stream: main_stream.asBroadcastStream(),
 		builder: (
 			BuildContext context,
 			AsyncSnapshot<dynamic> snapshot,
 		) {
+			print(String.fromCharCodes(snapshot.data as Uint8List));
 			return Column (
 				children: List.generate(current_states.length, (index) {
 					if (current_states.length != 0) {
