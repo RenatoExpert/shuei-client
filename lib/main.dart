@@ -10,7 +10,7 @@ var main_socket;
 connect () async {
 	print('Connecting...');
 	main_socket = await Socket.connect('shuei.shogunautomacao.com.br', 2000);
-	main_socket.write('{"type":"client"}\n');
+	await main_socket.write('{"type":"client"}\n');
 }
 
 void main() async {
