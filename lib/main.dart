@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
 			BuildContext context,
 			AsyncSnapshot<dynamic> snapshot,
 		) {
-			print(String.fromCharCodes(snapshot.data as Uint8List));
+			print(String.fromCharCodes(snapshot.data));
 			return Column (
 				children: List.generate(current_states.length, (index) {
 					if (current_states.length != 0) {
