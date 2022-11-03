@@ -68,15 +68,16 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 				size: 30,
 			),
 			onPressed: () {
-				stack_commands.add({
+				/*
+				stack_commands.({
 					"uuid": this.uuid,
 					"cmd" : "revertstate",
 					"args": {
 						"pair_id": this.gadget_index.toString(),
 					}
 				});
+				*/
 				print("Got a click");
-				print(stack_commands);
 			},
 			tooltip: tooltip_render,
 		);
