@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'communicator.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
