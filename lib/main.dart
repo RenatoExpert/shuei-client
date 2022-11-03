@@ -8,7 +8,6 @@ import 'dart:convert';
 final host = 'shuei.shogunautomacao.com.br';
 final port = 2000;
 var main_socket;
-Map<String, dynamic> current_states = {};
 
 connect () async {
 	print('Connecting...');
