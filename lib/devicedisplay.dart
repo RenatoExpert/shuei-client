@@ -32,8 +32,18 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 		}
 		*/
 	}
-	final revert_button = () {
+	final flip = () {
 		print('revert');
+		/*
+		stack_commands.({
+			"uuid": this.uuid,
+			"cmd" : "revertstate",
+			"args": {
+				"pair_id": this.gadget_index.toString(),
+			}
+		});
+		*/
+		print("Got a click");
 	};
 	get tooltip_render { 
 		var isActive = lock_state() == '2'|| lock_state() =='3'; 
@@ -68,16 +78,7 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 				size: 30,
 			),
 			onPressed: () {
-				/*
-				stack_commands.({
-					"uuid": this.uuid,
-					"cmd" : "revertstate",
-					"args": {
-						"pair_id": this.gadget_index.toString(),
-					}
-				});
-				*/
-				print("Got a click");
+				flip();
 			},
 			tooltip: tooltip_render,
 		);
