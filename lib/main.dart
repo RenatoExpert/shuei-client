@@ -57,21 +57,25 @@ class _MyHomePageState extends State<MyHomePage> {
 			BuildContext context,
 			AsyncSnapshot<dynamic> snapshot,
 		) {
-			current_states = jsonDecode(
-				String.fromCharCodes(snapshot.data)
-			);
-			print(current_states);
-			print('received');
-			return Column (
-				children: List.generate(current_states.length, (index) {
-					if (current_states.length != 0) {
-						return DeviceDisplay(current_states.keys.elementAt(index));
-					} else {
-						return Text('No gadgets to display :-(');
-					}
-				}),
-				mainAxisAlignment: MainAxisAlignment.center,
-			);
+			try {
+				current_states = jsonDecode(
+					String.fromCharCodes(snapshot.data)
+				);
+				print(current_states);
+				print('received');
+				return Column (
+					children: List.generate(current_states.length, (index) {
+						if (current_states.length != 0) {
+							return DeviceDisplay(current_states.keys.elementAt(index));
+						} else {
+							return Text('No gadgets to display :-(');
+						}
+					}),
+					mainAxisAlignment: MainAxisAlignment.center,
+				);
+			} catch (e) {
+				return Text('Error (e)');
+			}
 		}
       ),
     );
