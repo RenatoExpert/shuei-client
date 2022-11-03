@@ -5,11 +5,13 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:convert';
 
+final host = 'shuei.shogunautomacao.com.br';
+final port = 2000;
 var main_socket;
 
 connect () async {
 	print('Connecting...');
-	main_socket = await Socket.connect('shuei.shogunautomacao.com.br', 2000);
+	main_socket = await Socket.connect(host, port);
 	await main_socket.write('{"type":"client"}\n');
 }
 
