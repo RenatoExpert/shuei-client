@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 class DeviceDisplay extends StatefulWidget {
 	final String uuid;
-	DeviceDisplay(@required this.uuid);
+	final Socket sender;
+	DeviceDisplay(@required this.uuid, @required this.sender);
 	@override
-	_DeviceDisplayState createState() => _DeviceDisplayState(this.uuid);
+	_DeviceDisplayState createState() => _DeviceDisplayState(this.uuid, this.sender);
 }
 
 class GenericIconButton extends StatefulWidget {
@@ -12,7 +13,8 @@ class GenericIconButton extends StatefulWidget {
 	final String radical;
 	final int gadget_index;
 	final String uuid;
-	GenericIconButton(@required this.iconsym, @required this.radical, @required this.gadget_index, @required this.uuid);
+	final Socket sender;
+	GenericIconButton(@required this.iconsym, @required this.radical, @required this.gadget_index, @required this.uuid, @required this.sender);
 	@override
 	_GenericIconButtonState createState() => _GenericIconButtonState(this.iconsym, this.radical, this.gadget_index, this.uuid);
 }
@@ -22,6 +24,7 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 	final String radical;
 	final int gadget_index;
 	final String uuid;
+	final Socket sender;
 	String lock_state () {
 		return '2';
 		/*
@@ -43,7 +46,6 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 			}
 		});
 		*/
-		print("Got a click");
 	};
 	get tooltip_render { 
 		var isActive = lock_state() == '2'|| lock_state() =='3'; 
@@ -67,7 +69,7 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 				break;
 		}
 	}
-	_GenericIconButtonState(@required this.iconsym, @required this.radical, @required this.gadget_index, @required this.uuid);
+	_GenericIconButtonState(@required this.iconsym, @required this.radical, @required this.gadget_index, @required this.uuid, @required this.sender);
 	@override
 	Widget build(BuildContext context) {
 		return IconButton(
@@ -87,7 +89,8 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 
 class _DeviceDisplayState extends State<DeviceDisplay> {
 	final String uuid;
-	_DeviceDisplayState(@required this.uuid);
+	final Socket sender;
+	_DeviceDisplayState(@required this.uuid, this.sender);
 	@override
 	Widget build(BuildContext context) {
 		return Center(
@@ -98,9 +101,9 @@ class _DeviceDisplayState extends State<DeviceDisplay> {
 					Row (
 						mainAxisAlignment: MainAxisAlignment.center,
 						children: <Widget>[
-							GenericIconButton (Icons.lock, 'Lock', 0, this.uuid),
-							GenericIconButton (Icons.lightbulb, 'Light', 1, this.uuid),
-							GenericIconButton (Icons.ac_unit, 'Air conditioner', 2, this.uuid),
+							GenericIconButton (Icons.lock, 'Lock', 0, this.uuid, this.sender),
+							GenericIconButton (Icons.lightbulb, 'Light', 1, this.uuid, this.sender),
+							GenericIconButton (Icons.ac_unit, 'Air conditioner', 2, this.uuid, this.sender),
 						], //   row's children
 					), //   row 
 				], //   columns' children
