@@ -25,21 +25,25 @@ var builder = StreamBuilder<dynamic>(
 		AsyncSnapshot<dynamic> snapshot,
 	) {
 		try {
-			current_states = jsonDecode(
-				String.fromCharCodes(snapshot.data)
-			);
-			print(current_states);
-			print('received');
-			return Column (
-				children: List.generate(current_states.length, (index) {
-					if (current_states.length != 0) {
-						return DeviceDisplay(current_states.keys.elementAt(index), main_socket);
-					} else {
-						return Text('No gadgets to display :-(');
-					}
-				}),
-				mainAxisAlignment: MainAxisAlignment.center,
-			);
+			try {
+				current_states = jsonDecode(
+					String.fromCharCodes(snapshot.data)
+				);
+			} catch (e) {
+				print(e);
+			}
+			if (current_states.isEmpty) {
+				return Text('Listening for new gadgets...');
+			} else if (current_states.length > 0) {
+				return Column (
+					children: List.generate(current_states.length, (index) {
+							return DeviceDisplay(current_states.keys.elementAt(index), main_socket);
+					}),
+					mainAxisAlignment: MainAxisAlignment.center,
+				);
+			} else {
+				return Text("Unknown error");
+			}
 		} catch (e) {
 			return Text("Error: $e");
 		}
