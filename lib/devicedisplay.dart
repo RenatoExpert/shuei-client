@@ -38,6 +38,7 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 	}
 	final flip = () {
 		print('revert');
+		this.sender.write('{ "uuid": "mycontroller", "command": "setstate", "args":{ "gpio":"3", "pinstate":"1"} }\n');
 		/*
 		stack_commands.({
 			"uuid": this.uuid,
