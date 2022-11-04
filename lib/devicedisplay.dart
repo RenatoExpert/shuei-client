@@ -12,7 +12,7 @@ class DeviceDisplay extends StatefulWidget {
 class _DeviceDisplayState extends State<DeviceDisplay> {
 	final String uuid;
 	final Socket sender;
-	_DeviceDisplayState(@required this.uuid, this.sender);
+	_DeviceDisplayState(@required this.uuid, @required this.sender);
 	@override
 	Widget build(BuildContext context) {
 		return Center(
