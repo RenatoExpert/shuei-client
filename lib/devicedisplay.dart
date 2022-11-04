@@ -61,18 +61,6 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 		}
 		*/
 	}
-	final flip = () {
-		print('revert');
-		/*
-		stack_commands.({
-			"uuid": this.uuid,
-			"cmd" : "revertstate",
-			"args": {
-				"pair_id": this.gadget_index.toString(),
-			}
-		});
-		*/
-	};
 	get tooltip_render { 
 		var isActive = lock_state() == '2'|| lock_state() =='3'; 
 		var execution = isActive  ? 'Allowed' : 'Disabled';
