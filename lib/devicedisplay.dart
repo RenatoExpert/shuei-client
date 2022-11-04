@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 class DeviceDisplay extends StatefulWidget {
 	final String uuid;
@@ -16,7 +17,7 @@ class GenericIconButton extends StatefulWidget {
 	final Socket sender;
 	GenericIconButton(@required this.iconsym, @required this.radical, @required this.gadget_index, @required this.uuid, @required this.sender);
 	@override
-	_GenericIconButtonState createState() => _GenericIconButtonState(this.iconsym, this.radical, this.gadget_index, this.uuid);
+	_GenericIconButtonState createState() => _GenericIconButtonState(this.iconsym, this.radical, this.gadget_index, this.uuid, this.sender);
 }
 
 class _GenericIconButtonState extends State<GenericIconButton> {

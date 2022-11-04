@@ -27,7 +27,7 @@ var builder = StreamBuilder<dynamic>(
 			return Column (
 				children: List.generate(current_states.length, (index) {
 					if (current_states.length != 0) {
-						return DeviceDisplay(current_states.keys.elementAt(index));
+						return DeviceDisplay(current_states.keys.elementAt(index), main_socket);
 					} else {
 						return Text('No gadgets to display :-(');
 					}
