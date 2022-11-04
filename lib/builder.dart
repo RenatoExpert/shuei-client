@@ -12,6 +12,12 @@ final port = 2000;
 var main_socket;
 final main_stream = main_socket.asBroadcastStream();
 
+connect () async {
+	print('Connecting...');
+	main_socket = await Socket.connect(host, port);
+	await main_socket.write('{"type":"client"}\n');
+}
+
 var builder = StreamBuilder<dynamic>(
 	stream: main_stream.asBroadcastStream(),
 	builder: (
@@ -27,7 +33,7 @@ var builder = StreamBuilder<dynamic>(
 			return Column (
 				children: List.generate(current_states.length, (index) {
 					if (current_states.length != 0) {
-						return DeviceDisplay(current_states.keys.elementAt(index));
+						return DeviceDisplay(current_states.keys.elementAt(index), main_socket);
 					} else {
 						return Text('No gadgets to display :-(');
 					}
@@ -39,9 +45,3 @@ var builder = StreamBuilder<dynamic>(
 		}
 	}
 );
-
-connect () async {
-	print('Connecting...');
-	main_socket = await Socket.connect(host, port);
-	await main_socket.write('{"type":"client"}\n');
-}
