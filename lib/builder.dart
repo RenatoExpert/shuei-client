@@ -50,7 +50,7 @@ var builder = StreamBuilder<dynamic>(
 			case ConnectionState.none:
 				return Text('Things are so calm by here...');
 			case ConnectionState.done:
-				return Text('Fetching...');
+				return Text('Connection is lost.\nTrying to reconnect...');
 			case ConnectionState.active:
 				if (snapshot.hasData) {
 					try {
