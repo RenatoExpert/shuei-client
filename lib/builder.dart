@@ -14,8 +14,17 @@ final main_stream = main_socket.asBroadcastStream();
 
 connect () async {
 	print('Connecting...');
-	main_socket = await Socket.connect(host, port);
-	await main_socket.write('{"type":"client"}\n');
+	while (true) {
+		try {
+			main_socket = await Socket.connect(host, port);
+			await main_socket.write('{"type":"client"}\n');
+			break;
+		} catch(e) {
+			print("Server connection failed ${e}");
+			sleep(Duration(seconds:1));
+			print("Retrying...");
+		}
+	}
 }
 
 var builder = StreamBuilder<dynamic>(
