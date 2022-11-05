@@ -4,7 +4,7 @@ import 'dart:async';
 
 
 void main() async {
-	await connect();
+	connect();
 	runApp(const MyApp());
 }
 

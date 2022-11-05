@@ -30,7 +30,7 @@ connect () async {
 }
 
 var builder = StreamBuilder<dynamic>(
-	stream: main_stream.asBroadcastStream(),
+	stream: main_stream,
 	builder: (
 		BuildContext context,
 		AsyncSnapshot<dynamic> snapshot,
