@@ -46,7 +46,7 @@ var builder = StreamBuilder<dynamic>(
 	) {
 		switch (snapshot.connectionState) {
 			case ConnectionState.waiting:
-				return Text('Connecting to server...');
+				return Text('Connected! Fetching data...');
 			case ConnectionState.none:
 				return Text('Things are so calm by here...');
 			case ConnectionState.done:
@@ -57,7 +57,6 @@ var builder = StreamBuilder<dynamic>(
 						try {
 							final raw_string = String.fromCharCodes(snapshot.data);
 							print(raw_string);
-							print('hi');
 							current_states = jsonDecode(raw_string);
 						} catch (e) {
 							print("Parsing info ${e}");
@@ -77,6 +76,8 @@ var builder = StreamBuilder<dynamic>(
 					} catch (e) {
 						return Text("Error: $e");
 					}
+				} else if (snapshot.hasError) {
+					return Text("${snapshot.error}");
 				} else {
 					return CircularProgressIndicator();
 				}
