@@ -12,11 +12,19 @@ final port = 2000;
 var main_socket;
 final main_stream = main_socket.asBroadcastStream();
 
+wait_disconnect () async {
+	main_stream.drain().then((_) {
+		print("Socket disconnected");
+		sleep(Duration(seconds:1));
+		connect();
+	});
+}
 connect () async {
 	print('Connecting...');
 	while (true) {
 		try {
 			main_socket = await Socket.connect(host, port);
+			wait_disconnect();
 			await main_socket.write('{"type":"client"}\n');
 			break;
 		} catch(e) {
