@@ -12,14 +12,6 @@ final port = 2000;
 var main_socket;
 var main_stream;
 
-wait_disconnect () async {
-	main_stream.drain().then((_) {
-		main_socket.close();
-		print("Socket disconnected");
-		sleep(Duration(seconds:1));
-		connect();
-	});
-}
 connect () async {
 	print('Connecting...');
 	while (true) {
@@ -29,7 +21,6 @@ connect () async {
 			main_stream = main_socket.asBroadcastStream();
 			await main_socket.write('{"type":"client"}\n');
 			break;
-			wait_disconnect();
 		} catch(e) {
 			print("Server connection failed ${e}");
 			sleep(Duration(seconds:1));
@@ -50,6 +41,10 @@ var builder = StreamBuilder<dynamic>(
 			case ConnectionState.none:
 				return Text('Things are so calm by here...');
 			case ConnectionState.done:
+				main_socket.close();
+				print("Socket disconnected");
+				sleep(Duration(seconds:1));
+				connect();
 				return Text('Connection is lost.\nTrying to reconnect...');
 			case ConnectionState.active:
 				if (snapshot.hasData) {
