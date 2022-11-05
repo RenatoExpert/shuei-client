@@ -17,7 +17,7 @@ wait_disconnect () async {
 		main_socket.close();
 		print("Socket disconnected");
 		sleep(Duration(seconds:1));
-		//connect();
+		connect();
 	});
 }
 connect () async {
