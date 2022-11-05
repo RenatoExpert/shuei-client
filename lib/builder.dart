@@ -14,9 +14,10 @@ final main_stream = main_socket.asBroadcastStream();
 
 wait_disconnect () async {
 	main_stream.drain().then((_) {
+		main_socket.close();
 		print("Socket disconnected");
 		sleep(Duration(seconds:1));
-		connect();
+		//connect();
 	});
 }
 connect () async {
@@ -24,8 +25,8 @@ connect () async {
 	while (true) {
 		try {
 			main_socket = await Socket.connect(host, port);
-			wait_disconnect();
 			await main_socket.write('{"type":"client"}\n');
+			wait_disconnect();
 			break;
 		} catch(e) {
 			print("Server connection failed ${e}");
