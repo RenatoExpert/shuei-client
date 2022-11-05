@@ -18,11 +18,14 @@ connect () async {
 		try {
 			main_socket = await Socket.connect(host, port);
 			print('Connected!');
-			main_stream = main_socket.asBroadcastStream();
-			await main_socket.write('{"type":"client"}\n');
-			break;
+			if (main_socket!=Null) {
+				main_stream = main_socket.asBroadcastStream();
+				await main_socket.write('{"type":"client"}\n');
+				break;
+			}
 		} catch(e) {
 			print("Server connection failed ${e}");
+		} finally {
 			sleep(Duration(seconds:1));
 			print("Retrying...");
 		}
@@ -30,7 +33,7 @@ connect () async {
 }
 
 var builder = StreamBuilder<dynamic>(
-	stream: main_stream.asBroadcastStream(),
+	stream: main_stream,
 	builder: (
 		BuildContext context,
 		AsyncSnapshot<dynamic> snapshot,
@@ -47,7 +50,9 @@ var builder = StreamBuilder<dynamic>(
 				connect();
 				return Text('Connection is lost.\nTrying to reconnect...');
 			case ConnectionState.active:
-				if (snapshot.hasData) {
+				if (snapshot.hasError) {
+					return Text("${snapshot.error}");
+				} else if (snapshot.hasData) {
 					try {
 						try {
 							final raw_string = String.fromCharCodes(snapshot.data);
@@ -71,8 +76,6 @@ var builder = StreamBuilder<dynamic>(
 					} catch (e) {
 						return Text("Error: $e");
 					}
-				} else if (snapshot.hasError) {
-					return Text("${snapshot.error}");
 				} else {
 					return CircularProgressIndicator();
 				}
