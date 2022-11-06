@@ -20,9 +20,20 @@ connect () async {
 			print('Connected!');
 			await main_socket.write('{"type":"client"}\n');
 			print('Waiting for updates...');
-			var broadcast = main_stream.addStream(main_socket);
+			var broadcast = main_socket.asBroadcastStream();
+			main_stream.addStream(broadcast);
+			broadcast.listen((message) {
+				print("RECEIVED SOMETHING");
+			}, onError:(e) {
+				print("ON ERROR");
+				main_socket.close();
+				connect();
+			}, onDone:() {
+				print("ON DONE");
+				main_socket.close();
+				connect();
+			});
 			print('it worked');
-			sleep(Duration(seconds:3));
 			break;
 		} catch(e) {
 			print("Server connection failed ${e}");
