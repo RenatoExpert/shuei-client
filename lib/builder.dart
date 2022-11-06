@@ -10,26 +10,30 @@ Map<String, dynamic> current_states = {};
 final host = 'shuei.shogunautomacao.com.br';
 final port = 2000;
 var main_socket;
-var main_stream = StreamController();
+StreamController<dynamic> main_stream = StreamController.broadcast();
 
 connect () async {
 	print('Connecting...');
 	while (true) {
 		try {
 			main_socket = await Socket.connect(host, port);
-			main_socket.drain();
 			print('Connected!');
 			await main_socket.write('{"type":"client"}\n');
 			print('Waiting for updates...');
 			var broadcast = main_socket.asBroadcastStream();
-			main_stream.addStream(broadcast);
+			broadcast.where((message)=>message!=Null);
 			broadcast.listen((message) {
 				print("RECEIVED SOMETHING");
+				print(message);
+				main_stream.sink.add(message);
 			}, onError:(e) {
 				print("ON ERROR");
+				main_socket.close();
+				main_stream.sink.addError(e);
 				connect();
 			}, onDone:() {
 				print("ON DONE");
+				main_stream.sink.addError("Connection ended");
 				connect();
 			});
 			break;
@@ -40,6 +44,7 @@ connect () async {
 		}
 	}
 }
+
 
 var builder = StreamBuilder<dynamic>(
 	stream: main_stream.stream,
@@ -64,33 +69,30 @@ var builder = StreamBuilder<dynamic>(
 			case ConnectionState.active:
 				if (snapshot.hasData) {
 					try {
-						try {
-							final raw_string = String.fromCharCodes(snapshot.data);
-							print(raw_string);
-							current_states = jsonDecode(raw_string);
-						} catch (e) {
-							print("Parsing info ${e}");
-						}
-						if (current_states.isEmpty) {
-							return Text('Listening for new gadgets...');
-						} else if (current_states.length > 0) {
-							return Column (
-								children: List.generate(current_states.length, (index) {
-										return DeviceDisplay(current_states.keys.elementAt(index), main_socket);
-								}),
-								mainAxisAlignment: MainAxisAlignment.center,
-							);
-						} else {
-							return Text("Unknown error");
-						}
+						final raw_string = String.fromCharCodes(snapshot.data);
+						print(raw_string);
+						current_states = jsonDecode(raw_string);
 					} catch (e) {
-						return Text("Error: $e");
+						print("Parsing info ${e}");
 					}
-				} else if (snapshot.hasError) {
-					return Text("${snapshot.error}");
-				} else {
-					return CircularProgressIndicator();
+					if (current_states.isEmpty) {
+						return Text('Listening for new gadgets...');
+					} else if (current_states.length > 0) {
+						return Column (
+							children: List.generate(current_states.length, (index) {
+									return DeviceDisplay(current_states.keys.elementAt(index), main_socket);
+							}),
+							mainAxisAlignment: MainAxisAlignment.center,
+						);
+					}
 				}
 		}
+		return Column (
+			children: <Widget> [
+				CircularProgressIndicator(),
+				Text('Connection lost. Reconnecting...'),
+			],
+			mainAxisAlignment: MainAxisAlignment.center,
+		);
 	}
 );
