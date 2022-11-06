@@ -4,8 +4,8 @@ import 'dart:async';
 
 
 void main() async {
-	connect();
 	runApp(const MyApp());
+	connect();
 }
 
 class MyApp extends StatelessWidget {
