@@ -26,16 +26,7 @@ class DeviceDisplay extends StatelessWidget {
 	} //	Widget
 } //    class
 
-class GenericIconButton extends StatefulWidget {
-	final IconData iconsym;
-	final String radical;
-	final int gadget_index;
-	final String uuid;
-	final Socket sender;
-	GenericIconButton(@required this.iconsym, @required this.radical, @required this.gadget_index, @required this.uuid, @required this.sender);
-}
-
-class _GenericIconButtonState extends State<GenericIconButton> {
+class GenericIconButton extends StatelessWidget {
 	final IconData iconsym;
 	final String radical;
 	final int gadget_index;
@@ -66,7 +57,7 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 				break;
 		}
 	}
-	_GenericIconButtonState(@required this.iconsym, @required this.radical, @required this.gadget_index, @required this.uuid, @required this.sender);
+	GenericIconButton(@required this.iconsym, @required this.radical, @required this.gadget_index, @required this.uuid, @required this.sender);
 	@override
 	Widget build(BuildContext context) {
 		return IconButton(
