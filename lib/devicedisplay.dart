@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-class DeviceDisplay extends StatefulWidget {
+class DeviceDisplay extends StatelessWidget {
 	final String uuid;
 	final Socket sender;
 	DeviceDisplay(@required this.uuid, @required this.sender);
-	@override
-	_DeviceDisplayState createState() => _DeviceDisplayState(this.uuid, this.sender);
-}
-
-class _DeviceDisplayState extends State<DeviceDisplay> {
-	final String uuid;
-	final Socket sender;
-	_DeviceDisplayState(@required this.uuid, @required this.sender);
 	@override
 	Widget build(BuildContext context) {
 		return Center(
@@ -41,8 +33,6 @@ class GenericIconButton extends StatefulWidget {
 	final String uuid;
 	final Socket sender;
 	GenericIconButton(@required this.iconsym, @required this.radical, @required this.gadget_index, @required this.uuid, @required this.sender);
-	@override
-	_GenericIconButtonState createState() => _GenericIconButtonState(this.iconsym, this.radical, this.gadget_index, this.uuid, this.sender);
 }
 
 class _GenericIconButtonState extends State<GenericIconButton> {
@@ -53,13 +43,6 @@ class _GenericIconButtonState extends State<GenericIconButton> {
 	final Socket sender;
 	String lock_state () {
 		return '2';
-		/*
-		if (current_states.containsKey(this.uuid)) {
-			return current_states[this.uuid].toString()[gadget_index];
-		} else {
-			return 'null';
-		}
-		*/
 	}
 	get tooltip_render { 
 		var isActive = lock_state() == '2'|| lock_state() =='3'; 
