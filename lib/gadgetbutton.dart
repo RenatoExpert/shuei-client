@@ -12,7 +12,7 @@ class GenericIconButton extends StatelessWidget {
 	get tooltip_render { 
 		var isActive = lock_state() == '2'|| lock_state() =='3'; 
 		var execution = isActive  ? 'Allowed' : 'Disabled';
-		var inverse' = isActive ? 'disable' : 'enable';
+		var inverse = isActive ? 'disable' : 'enable';
 		return "${radical} is ${execution}. Click to ${inverse}";
 	}
 	get iconColor {
