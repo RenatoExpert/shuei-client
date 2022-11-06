@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-class GenericIconButton extends StatelessWidget {
+class GadgetButton extends StatelessWidget {
 	final IconData iconsym;
 	final String radical;
 	final int gadget_index;
@@ -32,7 +32,7 @@ class GenericIconButton extends StatelessWidget {
 				break;
 		}
 	}
-	GenericIconButton(@required this.iconsym, @required this.radical, @required this.gadget_index, @required this.uuid, @required this.sender);
+	GadgetButton(@required this.iconsym, @required this.radical, @required this.gadget_index, @required this.uuid, @required this.sender);
 	@override
 	Widget build(BuildContext context) {
 		return IconButton(

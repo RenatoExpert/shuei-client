@@ -16,9 +16,9 @@ class DeviceDisplay extends StatelessWidget {
 					Row (
 						mainAxisAlignment: MainAxisAlignment.center,
 						children: <Widget>[
-							GenericIconButton (Icons.lock, 'Lock', 0, this.uuid, this.sender),
-							GenericIconButton (Icons.lightbulb, 'Light', 1, this.uuid, this.sender),
-							GenericIconButton (Icons.ac_unit, 'Air conditioner', 2, this.uuid, this.sender),
+							GadgetButton (Icons.lock, 'Lock', 0, this.uuid, this.sender),
+							GadgetButton (Icons.lightbulb, 'Light', 1, this.uuid, this.sender),
+							GadgetButton (Icons.ac_unit, 'Air conditioner', 2, this.uuid, this.sender),
 						], //   row's children
 					), //   row 
 				], //   columns' children
