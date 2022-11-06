@@ -23,9 +23,12 @@ connect () async {
 			var broadcast = main_socket.asBroadcastStream();
 			broadcast.where((message)=>message!=Null);
 			broadcast.listen((message) {
+				try {
+					main_stream.sink.add(jsonDecode(String.fromCharCodes(message)));
+				} catch (e) {
+					print("Parsing info ${e}");
+				}
 				print("RECEIVED SOMETHING");
-				print(message);
-				main_stream.sink.add(message);
 			}, onError:(e) {
 				print("ON ERROR");
 				main_socket.close();
@@ -68,19 +71,13 @@ var builder = StreamBuilder<dynamic>(
 				return Text('Connection is lost.\nTrying to reconnect...');
 			case ConnectionState.active:
 				if (snapshot.hasData) {
-					try {
-						final raw_string = String.fromCharCodes(snapshot.data);
-						print(raw_string);
-						current_states = jsonDecode(raw_string);
-					} catch (e) {
-						print("Parsing info ${e}");
-					}
-					if (current_states.isEmpty) {
+					final states = snapshot.data;
+					if (snapshot.data.isEmpty) {
 						return Text('Listening for new gadgets...');
-					} else if (current_states.length > 0) {
+					} else if (states.length > 0) {
 						return Column (
-							children: List.generate(current_states.length, (index) {
-									return DeviceDisplay(current_states.keys.elementAt(index), main_socket);
+							children: List.generate(states.length, (index) {
+									return DeviceDisplay(states.keys.elementAt(index), main_socket);
 							}),
 							mainAxisAlignment: MainAxisAlignment.center,
 						);
