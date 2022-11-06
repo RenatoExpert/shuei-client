@@ -6,7 +6,7 @@
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Yuji+Syuku');
 		.logo_text {
-			font-size: 380px;
+			font-size: 330px;
 			font-family: 'Yuji Syuku', serif;
 		}
 		.subtitle {
@@ -15,10 +15,10 @@
 			font-weight: bold;
 		}
 		circle {
-			fill: blue;
+			fill: dodgerblue;
 		}
 	</style>
 	<circle cx='400' cy='432' r='400' />
-	<text class='logo_text' y='540'>守衛</text>
-	<text class='subtitle' dy='660' x='120'>SHUEI CLIENT</text>
+	<text class='logo_text' x='60' y='500'>守衛</text>
+	<text class='subtitle' x='280' y='650'>SHUEI</text>
 </svg>
