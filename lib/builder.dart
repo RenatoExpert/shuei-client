@@ -10,7 +10,7 @@ Map<String, dynamic> current_states = {};
 final host = 'shuei.shogunautomacao.com.br';
 final port = 2000;
 var main_socket;
-var main_stream;
+var main_stream = StreamController();
 
 connect () async {
 	print('Connecting...');
@@ -18,8 +18,11 @@ connect () async {
 		try {
 			main_socket = await Socket.connect(host, port);
 			print('Connected!');
-			main_stream = main_socket.asBroadcastStream();
 			await main_socket.write('{"type":"client"}\n');
+			print('Waiting for updates...');
+			var broadcast = main_stream.addStream(main_socket);
+			print('it worked');
+			sleep(Duration(seconds:3));
 			break;
 		} catch(e) {
 			print("Server connection failed ${e}");
@@ -30,7 +33,7 @@ connect () async {
 }
 
 var builder = StreamBuilder<dynamic>(
-	stream: main_stream,
+	stream: main_stream.stream,
 	builder: (
 		BuildContext context,
 		AsyncSnapshot<dynamic> snapshot,
@@ -41,10 +44,7 @@ var builder = StreamBuilder<dynamic>(
 			case ConnectionState.none:
 				return Text('Things are so calm by here...');
 			case ConnectionState.done:
-				main_socket.close();
-				print("Socket disconnected");
-				sleep(Duration(seconds:1));
-				connect();
+				print("Socket seems disconnected");
 				return Text('Connection is lost.\nTrying to reconnect...');
 			case ConnectionState.active:
 				if (snapshot.hasData) {
