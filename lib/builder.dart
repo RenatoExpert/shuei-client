@@ -36,7 +36,7 @@ connect () async {
 			break;
 		} catch(e) {
 			print("Server connection failed ${e}");
-			sleep(Duration(seconds:1));
+			sleep(Duration(seconds:3));
 			print("Retrying...");
 		}
 	}
@@ -52,9 +52,10 @@ var builder = StreamBuilder<dynamic>(
 			case ConnectionState.waiting:
 				return Column (
 					children: <Widget> [
-						Text('Connecting to server...'),
 						CircularProgressIndicator(),
-					]
+						Text('Connecting to server...'),
+					],
+					mainAxisAlignment: MainAxisAlignment.center,
 				);
 			case ConnectionState.none:
 				return Text('Things are so calm by here...');
