@@ -33,7 +33,6 @@ connect () async {
 				main_socket.close();
 				connect();
 			});
-			print('it worked');
 			break;
 		} catch(e) {
 			print("Server connection failed ${e}");
@@ -51,7 +50,12 @@ var builder = StreamBuilder<dynamic>(
 	) {
 		switch (snapshot.connectionState) {
 			case ConnectionState.waiting:
-				return Text('Connected! Fetching data...');
+				return Column (
+					children: <Widget> [
+						Text('Connecting to server...'),
+						CircularProgressIndicator(),
+					]
+				);
 			case ConnectionState.none:
 				return Text('Things are so calm by here...');
 			case ConnectionState.done:
