@@ -17,6 +17,7 @@ connect () async {
 	while (true) {
 		try {
 			main_socket = await Socket.connect(host, port);
+			main_socket.drain();
 			print('Connected!');
 			await main_socket.write('{"type":"client"}\n');
 			print('Waiting for updates...');
@@ -26,17 +27,15 @@ connect () async {
 				print("RECEIVED SOMETHING");
 			}, onError:(e) {
 				print("ON ERROR");
-				main_socket.close();
 				connect();
 			}, onDone:() {
 				print("ON DONE");
-				main_socket.close();
 				connect();
 			});
 			break;
 		} catch(e) {
 			print("Server connection failed ${e}");
-			sleep(Duration(seconds:3));
+			await Future.delayed(Duration(seconds:3));
 			print("Retrying...");
 		}
 	}
