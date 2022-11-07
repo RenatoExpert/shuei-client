@@ -37,7 +37,31 @@ class _MyHomePageState extends State<MyHomePage> {
 			),
 			body: Center(child:builder),
 			floatingActionButton: FloatingActionButton (
-				onPressed: () { print('configure me');},
+				onPressed: () => showDialog(
+					context: context,
+					builder: (BuildContext context) {
+						return Expanded (
+							child: SimpleDialog (
+								title: Text('Server settings'),
+								children: <Widget> [
+									TextFormField (
+										decoration: InputDecoration (
+											icon: Icon(Icons.person),
+											hintText: 'shuei.shogunautomacao.com.br',
+											labelText: 'Address',
+										),
+										onSaved: (String? value) {
+											print('Saving... ${value}');
+										},
+										validator: (String? value) {
+											return (value!=Null && value == '#') ? 'Do not use the char "#"!' : null;
+										},
+									),
+								],
+							),
+						);
+					},
+				),
 				tooltip: 'Server settings',
 				child: Icon(Icons.settings),
 			),
