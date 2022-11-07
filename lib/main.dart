@@ -5,7 +5,6 @@ import 'dart:async';
 
 void main() async {
 	runApp(const MyApp());
-	connect();
 }
 
 class MyApp extends StatelessWidget {
@@ -39,5 +38,10 @@ class _MyHomePageState extends State<MyHomePage> {
 			),
 			body: Center(child:builder),
 		);
+	}
+	@override
+	void initState() {
+		super.initState();
+		WidgetsBinding.instance.addPostFrameCallback((_)=> connect());
 	}
 }
