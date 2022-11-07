@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'builder.dart';
 import 'dart:async';
 
-
-void main() async {
+void main() {
 	runApp(const MyApp());
 }
 
