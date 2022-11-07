@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+final portRegex = RegExp(r"^[0-9]+$");
+
 class ServerDialog extends StatefulWidget {
 	const ServerDialog({super.key});
 	@override
@@ -34,7 +36,7 @@ class ServerDialogState extends State<ServerDialog> {
 													print('Saving... ${value}');
 												},
 												validator: (String? value) {
-													return (value!=Null && value == '#') ? 'Do not use the char "#"!' : null;
+													return (value!=Null) ? 'Cannot be empty!' : null;
 												},
 											),
 									),
@@ -49,8 +51,12 @@ class ServerDialogState extends State<ServerDialog> {
 											onSaved: (String? value) {
 												print('Saving... ${value}');
 											},
-											validator: (String? value) {								
-												return (value!=Null && value == '#') ? 'Do not use the char "#"!' : null;
+											validator: (String? value) {
+												if (value!=null && portRegex.hasMatch(value)) {
+													return null;
+												} else {
+													return 'Not a valid port';
+												}
 											},
 										),
 									),
