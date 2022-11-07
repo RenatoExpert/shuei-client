@@ -35,7 +35,7 @@ class ServerDialogState extends State<ServerDialog> {
 												),
 												onSaved: (String? value) {
 													print('Saving address... ${value}');
-													address = value;
+													host = value;
 												},
 												validator: (String? value) {
 													return (value==null) ? 'Cannot be empty!' : null;
