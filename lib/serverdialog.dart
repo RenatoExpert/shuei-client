@@ -71,6 +71,7 @@ class ServerDialogState extends State<ServerDialog> {
 													onPressed: () {
 														if (_formKey.currentState!.validate()) {
 															_formKey.currentState!.save();
+															main_socket.close();
 														};
 													},
 													child: Icon(Icons.save),
