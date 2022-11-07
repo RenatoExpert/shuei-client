@@ -36,6 +36,11 @@ class _MyHomePageState extends State<MyHomePage> {
 				title: Text(widget.title),
 			),
 			body: Center(child:builder),
+			floatingActionButton: FloatingActionButton (
+				onPressed: () { print('configure me');},
+				tooltip: 'Server settings',
+				child: Icon(Icons.settings),
+			),
 		);
 	}
 	@override
