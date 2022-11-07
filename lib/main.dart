@@ -86,13 +86,23 @@ class ServerDialogState extends State<ServerDialog> {
 									),
 									Padding (
 										padding: EdgeInsets.all(8.0),
-										child: ElevatedButton (
-											onPressed: () {
-												if (_formKey.currentState!.validate()) {
-													print('heeey');
-												};
-											},
-											child: Icon(Icons.save),
+										child: Row (
+											children: <Widget> [
+												ElevatedButton (
+													onPressed: () {
+														if (_formKey.currentState!.validate()) {
+															print('heeey');
+														};
+													},
+													child: Icon(Icons.save),
+												),
+												ElevatedButton (
+													onPressed: () {
+														print('cancel it');
+													},
+													child: Icon(Icons.cancel),
+												),
+											],
 										),
 									),
 								],
