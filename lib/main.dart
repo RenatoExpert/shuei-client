@@ -98,7 +98,7 @@ class ServerDialogState extends State<ServerDialog> {
 												),
 												ElevatedButton (
 													onPressed: () {
-														print('cancel it');
+														Navigator.pop(context, 'Cancel');
 													},
 													child: Icon(Icons.cancel),
 												),
