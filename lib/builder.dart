@@ -4,11 +4,10 @@ import 'dart:typed_data';
 import 'dart:convert';
 import 'dart:async';
 import 'devicedisplay.dart';
+import 'headers.dart';
 
 Map<String, dynamic> serversheet = { "type": "client" };
 Map<String, dynamic> current_states = {};
-final host = 'shuei.shogunautomacao.com.br';
-final port = 2000;
 var main_socket;
 StreamController<dynamic> main_stream = StreamController.broadcast();
 

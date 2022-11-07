@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'headers.dart';
 
 final portRegex = RegExp(r"^[0-9]+$");
 
@@ -34,6 +35,7 @@ class ServerDialogState extends State<ServerDialog> {
 												),
 												onSaved: (String? value) {
 													print('Saving address... ${value}');
+													address = value;
 												},
 												validator: (String? value) {
 													return (value==null) ? 'Cannot be empty!' : null;
@@ -50,6 +52,7 @@ class ServerDialogState extends State<ServerDialog> {
 											),
 											onSaved: (String? value) {
 												print('Saving port... ${value}');
+												port = int.parse(value);
 											},
 											validator: (String? value) {
 												if (value!=null && portRegex.hasMatch(value)) {
