@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 class ServerDialog extends StatefulWidget {
 	const ServerDialog({super.key});
 	@override
-	ServerDialogState createState() {
-		return ServerDialogState();
-	}
+	ServerDialogState createState() => ServerDialogState();
 }
 
 class ServerDialogState extends State<ServerDialog> {
@@ -64,6 +62,7 @@ class ServerDialogState extends State<ServerDialog> {
 													onPressed: () {
 														if (_formKey.currentState!.validate()) {
 															print('heeey');
+															_formKey.currentState!.save();
 														};
 													},
 													child: Icon(Icons.save),
