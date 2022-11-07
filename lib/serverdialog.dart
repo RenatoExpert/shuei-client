@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'headers.dart';
+
+final portRegex = RegExp(r"^[0-9]+$");
 
 class ServerDialog extends StatefulWidget {
 	const ServerDialog({super.key});
 	@override
-	ServerDialogState createState() {
-		return ServerDialogState();
-	}
+	ServerDialogState createState() => ServerDialogState();
 }
 
 class ServerDialogState extends State<ServerDialog> {
@@ -33,10 +34,11 @@ class ServerDialogState extends State<ServerDialog> {
 													labelText: 'Address',
 												),
 												onSaved: (String? value) {
-													print('Saving... ${value}');
+													print('Saving address... ${value}');
+													host = value!=null ? value : host;
 												},
 												validator: (String? value) {
-													return (value!=Null && value == '#') ? 'Do not use the char "#"!' : null;
+													return (value==null) ? 'Cannot be empty!' : null;
 												},
 											),
 									),
@@ -49,10 +51,15 @@ class ServerDialogState extends State<ServerDialog> {
 												labelText: 'Port',
 											),
 											onSaved: (String? value) {
-												print('Saving... ${value}');
+												print('Saving port... ${value}');
+												port = value!=null ? int.parse(value) : port;
 											},
-											validator: (String? value) {								
-												return (value!=Null && value == '#') ? 'Do not use the char "#"!' : null;
+											validator: (String? value) {
+												if (value!=null && portRegex.hasMatch(value)) {
+													return null;
+												} else {
+													return 'Not a valid port';
+												}
 											},
 										),
 									),
@@ -63,7 +70,9 @@ class ServerDialogState extends State<ServerDialog> {
 												ElevatedButton (
 													onPressed: () {
 														if (_formKey.currentState!.validate()) {
-															print('heeey');
+															_formKey.currentState!.save();
+															main_socket.close();
+															Navigator.pop(context, 'Cancel');
 														};
 													},
 													child: Icon(Icons.save),
