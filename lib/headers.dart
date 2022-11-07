@@ -1,2 +1,2 @@
-var host = 'shuei.shogunautomacao.com.br';
-var port = 2000;
+String host = 'shuei.shogunautomacao.com.br';
+int port = 2000;

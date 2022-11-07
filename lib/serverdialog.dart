@@ -35,7 +35,7 @@ class ServerDialogState extends State<ServerDialog> {
 												),
 												onSaved: (String? value) {
 													print('Saving address... ${value}');
-													host = value;
+													host = value!=null ? value : host;
 												},
 												validator: (String? value) {
 													return (value==null) ? 'Cannot be empty!' : null;
@@ -52,7 +52,7 @@ class ServerDialogState extends State<ServerDialog> {
 											),
 											onSaved: (String? value) {
 												print('Saving port... ${value}');
-												port = int.parse(value);
+												port = value!=null ? int.parse(value) : port;
 											},
 											validator: (String? value) {
 												if (value!=null && portRegex.hasMatch(value)) {
