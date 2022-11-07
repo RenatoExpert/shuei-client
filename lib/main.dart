@@ -44,47 +44,59 @@ class ServerDialogState extends State<ServerDialog> {
 			child: SimpleDialog (
 				title: Text('Server settings'),
 				children: <Widget> [
-					Form (
-						key: _formKey,
-						autovalidateMode: AutovalidateMode.always,
-						onChanged: () {},
-						child: Wrap (
-							children: <Widget> [
-								TextFormField (
-									decoration: InputDecoration (
-										icon: Icon(Icons.cloud),
-										hintText: 'shuei.shogunautomacao.com.br',
-										labelText: 'Address',
+				   	Padding (
+						padding: EdgeInsets.all(32),
+						child: Form (
+							key: _formKey,
+							autovalidateMode: AutovalidateMode.always,
+							onChanged: () {},
+							child: Wrap (
+								children: <Widget> [
+									Padding (
+										padding: EdgeInsets.all(8.0),
+										child: TextFormField (
+												decoration: InputDecoration (
+													icon: Icon(Icons.cloud),
+													hintText: 'shuei.shogunautomacao.com.br',
+													labelText: 'Address',
+												),
+												onSaved: (String? value) {
+													print('Saving... ${value}');
+												},
+												validator: (String? value) {
+													return (value!=Null && value == '#') ? 'Do not use the char "#"!' : null;
+												},
+											),
 									),
-									onSaved: (String? value) {
-										print('Saving... ${value}');
-									},
-									validator: (String? value) {
-										return (value!=Null && value == '#') ? 'Do not use the char "#"!' : null;
-									},
-								),
-								TextFormField (
-									decoration: InputDecoration (
-										icon: Icon(Icons.polyline),
-										hintText: '2000',
-										labelText: 'Port',
+									Padding (
+										padding: EdgeInsets.all(8.0),
+										child: TextFormField (
+											decoration: InputDecoration (
+												icon: Icon(Icons.polyline),
+												hintText: '2000',
+												labelText: 'Port',
+											),
+											onSaved: (String? value) {
+												print('Saving... ${value}');
+											},
+											validator: (String? value) {								
+												return (value!=Null && value == '#') ? 'Do not use the char "#"!' : null;
+											},
+										),
 									),
-									onSaved: (String? value) {
-										print('Saving... ${value}');
-									},
-									validator: (String? value) {
-										return (value!=Null && value == '#') ? 'Do not use the char "#"!' : null;
-									},
-								),
-								ElevatedButton (
-									onPressed: () {
-										if (_formKey.currentState!.validate()) {
-											print('heeey');
-										};
-									},
-									child: Icon(Icons.save),
-								),
-							],
+									Padding (
+										padding: EdgeInsets.all(8.0),
+										child: ElevatedButton (
+											onPressed: () {
+												if (_formKey.currentState!.validate()) {
+													print('heeey');
+												};
+											},
+											child: Icon(Icons.save),
+										),
+									),
+								],
+							),
 						),
 					),
 				],
