@@ -28,6 +28,71 @@ class MyHomePage extends StatefulWidget {
 	State<MyHomePage> createState() => _MyHomePageState();
 }
 
+class ServerDialog extends StatefulWidget {
+	const ServerDialog({super.key});
+	@override
+	ServerDialogState createState() {
+		return ServerDialogState();
+	}
+}
+
+class ServerDialogState extends State<ServerDialog> {
+	final _formKey = GlobalKey<FormState>();
+	@override
+	Widget build(BuildContext context) {
+		return Expanded (
+			child: SimpleDialog (
+				title: Text('Server settings'),
+				children: <Widget> [
+					Form (
+						key: _formKey,
+						autovalidateMode: AutovalidateMode.always,
+						onChanged: () {},
+						child: Wrap (
+							children: <Widget> [
+								TextFormField (
+									decoration: InputDecoration (
+										icon: Icon(Icons.cloud),
+										hintText: 'shuei.shogunautomacao.com.br',
+										labelText: 'Address',
+									),
+									onSaved: (String? value) {
+										print('Saving... ${value}');
+									},
+									validator: (String? value) {
+										return (value!=Null && value == '#') ? 'Do not use the char "#"!' : null;
+									},
+								),
+								TextFormField (
+									decoration: InputDecoration (
+										icon: Icon(Icons.polyline),
+										hintText: '2000',
+										labelText: 'Port',
+									),
+									onSaved: (String? value) {
+										print('Saving... ${value}');
+									},
+									validator: (String? value) {
+										return (value!=Null && value == '#') ? 'Do not use the char "#"!' : null;
+									},
+								),
+								ElevatedButton (
+									onPressed: () {
+										if (_formKey.currentState!.validate()) {
+											print('heeey');
+										};
+									},
+									child: Icon(Icons.save),
+								),
+							],
+						),
+					),
+				],
+			),
+		);
+	}
+}
+
 class _MyHomePageState extends State<MyHomePage> {
 	@override
 	Widget build(BuildContext context) {
@@ -40,26 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
 				onPressed: () => showDialog(
 					context: context,
 					builder: (BuildContext context) {
-						return Expanded (
-							child: SimpleDialog (
-								title: Text('Server settings'),
-								children: <Widget> [
-									TextFormField (
-										decoration: InputDecoration (
-											icon: Icon(Icons.person),
-											hintText: 'shuei.shogunautomacao.com.br',
-											labelText: 'Address',
-										),
-										onSaved: (String? value) {
-											print('Saving... ${value}');
-										},
-										validator: (String? value) {
-											return (value!=Null && value == '#') ? 'Do not use the char "#"!' : null;
-										},
-									),
-								],
-							),
-						);
+						return ServerDialog();
 					},
 				),
 				tooltip: 'Server settings',
