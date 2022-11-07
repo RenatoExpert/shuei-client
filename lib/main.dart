@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'builder.dart';
+import 'serverdialog.dart';
 import 'dart:async';
 
 void main() {
@@ -37,7 +38,12 @@ class _MyHomePageState extends State<MyHomePage> {
 			),
 			body: Center(child:builder),
 			floatingActionButton: FloatingActionButton (
-				onPressed: () { print('configure me');},
+				onPressed: () => showDialog(
+					context: context,
+					builder: (BuildContext context) {
+						return ServerDialog();
+					},
+				),
 				tooltip: 'Server settings',
 				child: Icon(Icons.settings),
 			),
