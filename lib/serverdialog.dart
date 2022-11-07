@@ -72,6 +72,7 @@ class ServerDialogState extends State<ServerDialog> {
 														if (_formKey.currentState!.validate()) {
 															_formKey.currentState!.save();
 															main_socket.close();
+															Navigator.pop(context, 'Cancel');
 														};
 													},
 													child: Icon(Icons.save),
