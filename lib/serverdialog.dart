@@ -33,10 +33,10 @@ class ServerDialogState extends State<ServerDialog> {
 													labelText: 'Address',
 												),
 												onSaved: (String? value) {
-													print('Saving... ${value}');
+													print('Saving address... ${value}');
 												},
 												validator: (String? value) {
-													return (value!=Null) ? 'Cannot be empty!' : null;
+													return (value==null) ? 'Cannot be empty!' : null;
 												},
 											),
 									),
@@ -49,7 +49,7 @@ class ServerDialogState extends State<ServerDialog> {
 												labelText: 'Port',
 											),
 											onSaved: (String? value) {
-												print('Saving... ${value}');
+												print('Saving port... ${value}');
 											},
 											validator: (String? value) {
 												if (value!=null && portRegex.hasMatch(value)) {
@@ -67,7 +67,6 @@ class ServerDialogState extends State<ServerDialog> {
 												ElevatedButton (
 													onPressed: () {
 														if (_formKey.currentState!.validate()) {
-															print('heeey');
 															_formKey.currentState!.save();
 														};
 													},
