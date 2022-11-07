@@ -85,7 +85,7 @@ var builder = StreamBuilder<dynamic>(
 							children: List.generate(states.length, (index) {
 									return Padding (
 											child: DeviceDisplay(states.keys.elementAt(index), main_socket),
-											padding: EdgeInsets.all(8.0),
+											padding: EdgeInsets.all(12.0),
 									);
 							}),
 							mainAxisAlignment: MainAxisAlignment.center,
