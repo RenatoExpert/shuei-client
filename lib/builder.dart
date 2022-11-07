@@ -59,8 +59,14 @@ var builder = StreamBuilder<dynamic>(
 			case ConnectionState.waiting:
 				return Column (
 					children: <Widget> [
-						CircularProgressIndicator(),
-						Text('Connecting to server...'),
+						Padding (
+							child: CircularProgressIndicator(),
+							padding: EdgeInsets.all(8.0),
+						),
+						Padding (
+							child: Text('Connecting to server...'),
+							padding: EdgeInsets.all(8.0),
+						),
 					],
 					mainAxisAlignment: MainAxisAlignment.center,
 				);
@@ -77,7 +83,10 @@ var builder = StreamBuilder<dynamic>(
 					} else if (states.length > 0) {
 						return Column (
 							children: List.generate(states.length, (index) {
-									return DeviceDisplay(states.keys.elementAt(index), main_socket);
+									return Padding (
+											child: DeviceDisplay(states.keys.elementAt(index), main_socket),
+											padding: EdgeInsets.all(8.0),
+									);
 							}),
 							mainAxisAlignment: MainAxisAlignment.center,
 						);
@@ -86,8 +95,14 @@ var builder = StreamBuilder<dynamic>(
 		}
 		return Column (
 			children: <Widget> [
-				CircularProgressIndicator(),
-				Text('Connection lost. Reconnecting...'),
+				Padding (
+					child: CircularProgressIndicator(),
+					padding: EdgeInsets.all(8.0),
+				),
+				Padding (
+					child: Text('Connection lost. Reconnecting...'),
+					padding: EdgeInsets.all(8.0),
+				),
 			],
 			mainAxisAlignment: MainAxisAlignment.center,
 		);
