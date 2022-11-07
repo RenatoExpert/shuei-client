@@ -6,9 +6,6 @@ import 'dart:async';
 import 'devicedisplay.dart';
 import 'headers.dart';
 
-Map<String, dynamic> serversheet = { "type": "client" };
-Map<String, dynamic> current_states = {};
-var main_socket;
 StreamController<dynamic> main_stream = StreamController.broadcast();
 
 connect () async {
