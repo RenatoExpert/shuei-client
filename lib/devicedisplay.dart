@@ -19,6 +19,11 @@ class DeviceDisplay extends StatelessWidget {
 							GadgetButton (Icons.lock, 'Lock', 0, this.uuid, this.sender),
 							GadgetButton (Icons.lightbulb, 'Light', 1, this.uuid, this.sender),
 							GadgetButton (Icons.ac_unit, 'Air conditioner', 2, this.uuid, this.sender),
+							IconButton(
+								icon: Icon(Icons.build),
+								onPressed: () {},
+								tooltip: "Controller's settings",
+							),
 						], //   row's children
 					), //   row 
 				], //   columns' children
