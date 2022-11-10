@@ -79,9 +79,10 @@ var builder = StreamBuilder<dynamic>(
 					} else if (states.length > 0) {
 						return Column (
 							children: List.generate(states.length, (index) {
-									print(states);
+									final uuid = states.keys.elementAt(index);
+									final gadgets = states[uuid];
 									return Padding (
-											child: DeviceDisplay(states.keys.elementAt(index), {'ola':'ola'}, main_socket),
+											child: DeviceDisplay(uuid, gadgets, main_socket),
 											padding: EdgeInsets.all(12.0),
 									);
 							}),
