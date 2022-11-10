@@ -4,10 +4,12 @@ import 'gadgetbutton.dart';
 
 class DeviceDisplay extends StatelessWidget {
 	final String uuid;
+	final Map object;
 	final Socket sender;
-	DeviceDisplay(@required this.uuid, @required this.sender);
+	DeviceDisplay(@required this.uuid, @required this.object, @required this.sender);
 	@override
 	Widget build(BuildContext context) {
+		print(this.object);
 		return Center(
 			child: Column(
 				mainAxisAlignment: MainAxisAlignment.center,
