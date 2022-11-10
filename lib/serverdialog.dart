@@ -13,8 +13,7 @@ class ServerDialogState extends State<ServerDialog> {
 	final _formKey = GlobalKey<FormState>();
 	@override
 	Widget build(BuildContext context) {
-		return Expanded (
-			child: SimpleDialog (
+			return SimpleDialog (
 				title: Text('Server settings'),
 				children: <Widget> [
 				   	Padding (
@@ -91,8 +90,7 @@ class ServerDialogState extends State<ServerDialog> {
 						),
 					),
 				],
-			),
-		);
+			);
 	}
 }
 
