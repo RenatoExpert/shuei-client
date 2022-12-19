@@ -43,7 +43,7 @@ class GadgetButton extends StatelessWidget {
 				size: 30,
 			),
 			onPressed: () {
-				this.sender.write('{ "uuid": "mycontroller", "command": "setstate", "args":{ "gpio":"3", "pinstate":"1"} }\n');
+				this.sender.write('{"uuid": "${this.uuid}", "command": "tap", "gadget": "${this.gadget_index}"} \n');
 			},
 			tooltip: tooltip_render,
 		);
